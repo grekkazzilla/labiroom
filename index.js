@@ -236,7 +236,7 @@ div.appendChild(img);
 img.style.cursor='pointer';
 img.onclick=function(){window.location.href='/afor/';}
 // ******************** SUDOKU ******************* //
-var art=document.getElementById('artSudoku');
+/*var art=document.getElementById('artSudoku');
 var wSvg=75;
 var svg=makeSVG(art,wSvg,wSvg,false);
 var wBtn=70
@@ -497,6 +497,6 @@ var pth=getPth(btn,0,0,z,'url(#grdPale)','none',0,'M 36.8 0 C 19.5 21.8 0.3 34.3
 var x=wBtn/2-pth.getBBox().width*z/2;
 var y=wBtn/2-pth.getBBox().height*z/2-15;
 pth.setAttribute('transform','translate('+x+','+y+') scale('+z+')');
-getCrl(btn,35,64,3,'url(#grdPic)','none',0);
+getCrl(btn,35,64,3,'url(#grdPic)','none',0);*/
 //
 IS_lock=false;
