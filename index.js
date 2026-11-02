@@ -230,7 +230,7 @@ var img=document.createElement('img');
 img.style.position='relative';
 img.style.left='-5px';
 img.style.top='-7px';
-img.src='./afor/scull_blink.gif';
+img.src='afor/scull_blink.gif';
 art.appendChild(div);
 div.appendChild(img);
 img.style.cursor='pointer';
