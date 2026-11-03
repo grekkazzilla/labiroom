@@ -1,0 +1,195 @@
+<?php
+$aSetUp=require_once __DIR__.'/../../setUp.php';
+?>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+<title>master solitaire</title>
+<link rel='icon' type='image/svg+xml' href='/res/fav/fav.svg'>
+<link rel='alternate_icon' type='image/png' href='/res/fav/fav.png'>
+<link type='text/css' rel='stylesheet' href='/res/css/style.css?v=<?php echo $aSetUp['s_version']; ?>'>
+<style type='text/css'>
+svg{margin:-10px -10px 0px -10px;}
+span.mark{color:#ff474c;font-size:20px;}
+main p img.btn{width:49px;height:auto;border-radius:10px;}
+button#fs-btn{font-size:20px;}
+</style>
+</head>
+
+<body>
+
+<svg>
+ <image xlink:href='' />
+ <g id='gRoot'>
+  <g id='gSpin'>
+   <path fill='transparent' stroke='none' stroke-dth='0' d='M 49.2 0 C 48.5 -0 48 0 47.3 0 C 31.3 0.4 15.7 8.2 6.8 22.8 C -6 43.5 -0.3 72 20.8 84.8 C 39.4 96 64.9 90.9 76.2 71.8 C 86 55.3 81.4 32.7 64.4 22.9 C 50 14.6 30.4 18.7 22.1 33.6 C 15.2 46 18.8 62.6 31.7 69.5 C 41.9 74.9 55.7 71.7 61 60.9 C 64.9 52.8 62.3 41.9 53.6 38.2 C 50.6 36.9 47.1 36.8 44 37.9 C 41 38.9 38.4 41.2 37.3 44.5 C 36.8 46.4 36.9 48.8 37.8 50.7 C 38.6 52.6 40.3 54.1 42.7 54.2 A 0.5 0.5 0 0 0 42.8 53.2 C 40.8 53.1 39.5 51.9 38.7 50.2 C 37.9 48.6 37.8 46.5 38.3 44.8 C 39.2 41.8 41.5 39.8 44.3 38.8 C 47.1 37.8 50.4 38 53.2 39.1 C 61.3 42.6 63.8 52.9 60.1 60.5 C 55 70.8 41.9 73.7 32.1 68.6 C 19.8 62 16.3 46 22.9 34.1 C 31 19.7 50 15.7 63.9 23.8 C 80.4 33.3 84.9 55.3 75.4 71.3 C 64.4 89.9 39.5 94.9 21.3 83.9 C 0.7 71.4 -4.9 43.5 7.6 23.3 C 21.6 0.6 52.4 -5.5 74.8 8.4 C 99.6 23.9 106.1 57.7 90.7 82.1 C 90.1 83.1 89.5 84.1 88.8 85 A 0.5 0.5 0 1 0 89.6 85.6 C 90.3 84.7 91 83.7 91.6 82.7 C 107.3 57.8 100.6 23.4 75.3 7.6 C 67.3 2.6 58.2 0.1 49.2 0 z'/>
+  </g>
+ </g>
+ <defs>
+  <linearGradient id='grdBtn' x1='0' x2='0' y1='0' y2='1'>
+   <stop offset='0%' stop-color='#eee8aa' stop-opacity='1' />
+   <stop offset='100%' stop-color='#bdb76d' stop-opacity='1' />
+  </linearGradient> 
+ </defs>
+</svg>
+
+<main>
+
+<p style='text-align:center;'><button id="fs-btn">full screen</button></p>
+
+<p style='border:1px solid #c0c0c0;padding:10px;border-radius:10px;color:#909090;'>
+<img src='bulb.jpg' style='width:16px;height:auto;' /><br />
+Для удобства рекомендуем играть в горизонтальной ориентации экрана (landscape orientation).<br />
+<img src='turn.svg' style='width:49px;height:auto;margin-top:10px;opacity:0.75;' />
+</p>
+
+<p>
+<a href='../'>На главную страницу</a>
+</p>
+
+<h1>&#8226 Пасьянс "Подвал" &#8226</h1>
+
+<h2>Об игре</h2>
+<p>
+Сложный карточный пазл, где придётся изрядно поломать голову.
+С самого начала все карты открыты и лежат «ковром».
+Главная фишка не в том, чтобы просто раскладывать, а в стратегическом выборе: пытаться довести расклад до конца или вовремя признать, что он нераскладываемый, и пересдать, чтобы не потерять очки.
+Решение «сдаться» сразу — это не проигрыш, а допустимая тактика: ты осознанно теряешь меньше, чем мог бы, и получаешь новый «ковёр».
+Перед решением начать игру требуется в уме произвести расчёт.
+Каждый расклад имеет в начале много ложных ходов.
+Легко сделать пару красивых перемещений и загнать себя в тупик.
+</p>
+
+<h2>Правила</h2>
+
+<p><span class='mark'>&#9830</span>
+52 карты раскладываются как на рисунке ниже.
+Четыре туза кладутся в центр.
+Под тузами находится пустое место, которое называется "подвал".
+</p>
+<p class='img'><img src='about00.jpg' /></p>
+
+<p><span class='mark'>&#9830</span> Цель игры: на четырёх тузов в центральном вертикальном ряду необходимо собрать все карты по масти последовательно либо в возрастающем (с двойки до короля), либо в убывающем (с короля до двойки) порядке.</p>
+<p class='img'><img src='about01.jpg' /></p>
+<p><span class='mark'>&#9830</span> Начав собирать карты на одного туза, положив на него двойку или короля, далее следует придерживаться выбранного порядка для всех остальных тузов.</p>
+<p><span class='mark'>&#9830</span> Разрешено пользоваться только свободными, крайними боковыми картами. Остальные внутренние карты остаются заблокированными, пока сами в свою очередь не станут крайними свободными картами по мере того, как ряд будет разбираться. </p>
+<p class='img'><img src='about02.jpg' /></p>
+<p><span class='mark'>&#9830</span> Свободные карты одной масти можно перекладывать друг на друга в любом убывающем или возрастающем порядке. Одиночные карты, таким образом положенные друг на друга, образуют пачки. Пачки карт также можно перекладывать друг на друга, равно как и одиночные свободные карты можно добавлять к пачкам, либо пачки перекладывать на одиночные свободные карты, соблюдая масть и порядок.</p>
+<p><span class='mark'>&#9830</span> Если боковой ряд с любой из сторон какого-либо туза разобран (пять карт в ряду), то на это пустое место можно переложить любую свободную карту (как одиночную, так и пачку).</p>
+<p class='img'><img src='about03.jpg' /></p>
+<p><span class='mark'>&#9830</span> Пустое место в нижнем горизонтальном ряду посередине называется "подвалом", куда можно отправить любую свободную карту, но только одиночную. Всю пачку карт в подвал убрать нельзя.</p>
+<p class='img'><img src='about04.jpg' /></p>
+<p><span class='mark'>&#9830</span> Карта в подвале остаётся запертой. Освободить и убрать карту из подвала можно, если разобрать ряд из четырёх карт с любой стороны "подвала". Эти нижние ряды из четырёх карт называются "стенами подвала" (на схеме красным). Таким образом, "стены" блокируют карту в "подвале", пока одна из этих "стен" не убрана.</p>
+<p class='img'><img src='about05.jpg' /></p>
+<h2>Очки</h2>
+<p><span class='mark'>&#9830</span> За все разложенные карты, если на всех четырёх тузах одинаково соблюдён убывающий или возрастающий порядок, добавляется пять очков <span class='plus'>(+5)</span>. Это победа.</p>
+<p><span class='mark'>&#9830</span> Если же  карты все разложены, НО одинаковый порядок (убывающий или возрастающий) на всех четырёх тузах НЕ соблюдён, очки не присуждаются (ноль очков). Это ничья.</p>
+<p class='img'><img src='about06.jpg' class='btn' /></p>
+<p><span class='mark'>&#9830</span> Если игрок, сделав ходы (хотя бы один ход), не смог до конца решить расклад и сдался, то снимается три очка <span class='minus'>(-3)</span>. Это проигрыш.</p>
+<p class='img'><img src='about10.jpg' class='btn' /> <img src='about08.jpg' class='btn' /></p>
+<p><span class='mark'>&#9830</span> Если игрок, оценив новый расклад, сразу в самом начале заключил, что расклад не имеет решения, и сдался, НЕ сделав ни одного хода, тогда снимается только одно очко <span class='minus'>(-1)</span>.</p>
+<p class='img'><img src='about10.jpg' class='btn' /> <img src='about07.jpg' class='btn' /></p>
+<p><span class='mark'>&#9830</span> За отмену хода снимается одно очко, но только один раз за игру. Таким образом, отмену хода можно делать любое количество раз, но за это сгорит всего лишь одно очко <span class='minus'>(-1)</span>.</p>
+<p class='img'><img src='about09.jpg' class='btn' /></p>
+<p><span class='mark'>&#9830</span> Полная победа присуждается, если игрок наберёт максимально <span id='spn999'>999</span> очков.</p>
+<p class='img' ><img src='wonMax.jpg' /></p>
+<p><span class='mark'>&#9830</span> Все накопленные очки исчезнут, если очистить историю браузера (<span class='ita'>cookies</span>-файлы). Счёт начнётся заново с нуля.</p>
+
+<p>
+<a href='../'>На главную страницу</a>
+</p>
+
+</main>
+
+</body>
+
+<script type='text/javascript'>
+var W=1775;
+var H=1055;
+var Z=1;
+var SVG=document.getElementsByTagName('svg')[0];
+SVG.style.background='radial-gradient(green 0%, green 50%, darkgreen 100%)';
+var DFS=document.getElementsByTagName('defs')[0];
+var G_root=document.getElementById('gRoot');
+var G_spin=document.getElementById('gSpin');
+var IS_lock=true;
+// ******* ZOOM ******* //
+function setZoom(){
+ var wPage=document.documentElement.clientWidth;
+ var hPage=document.documentElement.clientHeight;
+ var zWidth=wPage/W;
+ var zHeight=hPage/H;
+ if(zWidth>zHeight) Z=zHeight;
+ else if(zWidth<zHeight) Z=zWidth;
+ SVG.style.width=wPage+'px';
+ SVG.style.height=H*Z+'px';
+ G_root.setAttribute('transform','translate('+(wPage-W*Z)/2+',0) scale('+Z+')');
+}//****************************************************************************************
+document.body.onorientationchange=function(){setZoom();}
+document.body.onresize=function(){setZoom();}
+setZoom();
+//
+G_spin.isOn=true;
+G_spin.z=2.25;
+G_spin.w=G_spin.getBBox().width*G_spin.z;
+G_spin.h=G_spin.getBBox().height*G_spin.z;
+G_spin.x=(W-G_spin.w)/2;
+G_spin.y=(H-G_spin.h)/2;
+G_spin.setAttribute('transform','translate('+G_spin.x+','+G_spin.y+') scale('+G_spin.z+')');
+spin();
+var pth=G_spin.getElementsByTagName('path')[0];
+pth.setAttribute('fill','url(#grdBtn)');
+pth.setAttribute('stroke','url(#grdBtn)');
+pth.setAttribute('stroke-width','5');
+function spin(){
+ G_spin.r=0;
+ G_spin.isOn=true;
+ anmSpin();
+}
+function anmSpin(){
+ G_spin.r+=3;
+ G_spin.setAttribute('transform','translate('+G_spin.x+','+G_spin.y+') rotate('+G_spin.r+','+G_spin.w/2+','+G_spin.h/2+') scale('+G_spin.z+')');
+ if(G_spin.isOn===true) requestAnimationFrame(function(){anmSpin();});
+ else hideG(G_spin);
+}
+</script>
+
+<?php if (!$aSetUp['is_prod']): ?>
+<?php
+ echo <<<HTML
+  <script src='script.js?v=2'></script>
+  <script src='draw.js?v=1'></script>
+  <script src='box.js?v=1'></script>
+  <script src='btn.js?v=1'></script>
+  <script src='spot.js?v=1'></script>
+  <script src='unit.js?v=1'></script>
+  <script src='score.js?v=1'></script>
+  <script src='anim.js?v=1'></script>
+  <script src='think.js?v=1'></script>
+  <script src='run.js?v=5'></script>
+  <script src='won.js?v=5'></script>
+  <script src='init.js?v=5'></script>
+ HTML;
+?>
+<?php else: ?>
+ <script type='text/javascript' src='bundle.min.js?v=1'></script>
+<?php endif; ?>
+
+<script>
+  const btn = document.getElementById('fs-btn');
+  btn.addEventListener('click', () => {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+    }
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  });
+</script>
+
+</html>
