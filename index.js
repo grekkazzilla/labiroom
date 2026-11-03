@@ -130,7 +130,7 @@ btn.onclick=function(){
    aLin[1].setAttribute('stroke','#bdb76d');
    IS_lock=false;
   },100); 
-  window.location.href='/lines/';
+  window.location.href='lines/';
  }
 }
 // ******************** MASTER ******************** //
@@ -184,7 +184,7 @@ btn.onclick=function(){
    aPth[1].setAttribute('fill','transparent');
    IS_lock=false;
   },100); 
-  window.location.href='/master/';
+  window.location.href='master/';
  }
 }
 // ******************** CHESS ********************* //
@@ -213,7 +213,7 @@ btn.onclick=function(){
    pth.setAttribute('fill','url(#grdPic)');
    IS_lock=false;
   },100); 
-  window.location.href='/chess/';
+  window.location.href='chess/';
  }
 }
 // ******************** AFOR ********************* //
@@ -234,7 +234,7 @@ img.src='afor/scull_blink.gif';
 art.appendChild(div);
 div.appendChild(img);
 img.style.cursor='pointer';
-img.onclick=function(){window.location.href='/afor/';}
+img.onclick=function(){window.location.href='afor/';}
 // ******************** SUDOKU ******************* //
 /*var art=document.getElementById('artSudoku');
 var wSvg=75;
