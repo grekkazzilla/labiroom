@@ -29,7 +29,18 @@ function run(){
   S_state='none';
   C_state=0;
   C_move_back=0;
-  getAsync('shuffle.php','',function(){
+  /* shuffle remade from php to js */
+  A_shuffle_id=[];
+  var arrSuit=Array('h','s','d','c');
+  for(var j=0;j<4;j++){
+   for(var i=2;i<15;i++) A_shuffle_id.push(arrSuit[j]+i);
+  }
+  shuffle(A_shuffle_id);
+  G_spin.isOn=false;
+  showG(ARN);
+  showG('gShirt');
+  anmLayOutNew(0,0,48);
+  /*getAsync('shuffle.php','',function(){
    var asw=XHR.responseText.split('~');
    if(asw[0]=='shuffle_1'){
     var rsp=asw[1].split('^');
@@ -41,7 +52,7 @@ function run(){
    showG(ARN);
    showG('gShirt');
    anmLayOutNew(0,0,48);
-  });
+  });*/
  }
  else if(DATA_state!='none'){
   var row=DATA_state.split('~');
