@@ -106,7 +106,7 @@ XHR.run=null;
 
 function getAsync(doc,param,run){
  XHR.run=run;
- XHR.open('POST',doc,true);
+ XHR.open('GET',doc,true);
  XHR.onreadystatechange=XHR.check;
  XHR.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
  XHR.send(param);}
