@@ -106,7 +106,7 @@ XHR.run=null;
 
 function getAsync(doc,param,run){
  XHR.run=run;
- XHR.open('POST',doc,true);
+ XHR.open('GET',doc,true);
  XHR.onreadystatechange=XHR.check;
  XHR.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
  XHR.send(param);}
@@ -121,4 +121,36 @@ XHR.check=function(){
  }
 }
 
-// ***************** //
+/************************************************************************************
+ * Transforms a point (x, y) from the coordinate system of one SVG element
+ * into the local coordinate system of another element within the same SVG.
+ *
+ * @param {SVGElement} fromEl - Element whose coordinate system contains x, y
+ * @param {SVGElement} toEl   - Element whose coordinate system to transform into
+ * @param {number} x
+ * @param {number} y
+ * @returns {SVGPoint}        - Point with x and y fields in toEl's local system
+ */
+function transformPointBetweenElements(fromEl, toEl, x, y) {
+  // Root <svg>: if fromEl IS the root, ownerSVGElement is null
+  const svgRoot = fromEl.ownerSVGElement || fromEl;
+
+  const pt = svgRoot.createSVGPoint();
+  pt.x = x;
+  pt.y = y;
+
+  const fromMatrix = fromEl.getScreenCTM();
+  const toMatrix = toEl.getScreenCTM();
+
+  // Elements are hidden or not in the DOM yet — return the point unchanged
+  if (!fromMatrix || !toMatrix) {
+    console.warn('transformPointBetweenElements: elements are not rendered');
+    return pt;
+  }
+
+  // Transition matrix: fromEl's system → toEl's system
+  const matrix = toMatrix.inverse().multiply(fromMatrix);
+
+  return pt.matrixTransform(matrix);
+}
+

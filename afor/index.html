@@ -88,6 +88,14 @@ img.setAttribute('y','0');
 img.setAttribute('width',W);
 img.setAttribute('height',H);
 SVG_arena.appendChild(img);
+//
+const imgJawOpen=document.createElementNS('http://www.w3.org/2000/svg','image');
+imgJawOpen.setAttribute('href','scull_jaw_open.png');
+imgJawOpen.setAttribute('x','0');
+imgJawOpen.setAttribute('y','41');
+imgJawOpen.setAttribute('width',323);
+imgJawOpen.setAttribute('height',252);
+SVG_arena.appendChild(imgJawOpen);
 // pale gradient
 const DFS=document.createElementNS('http://www.w3.org/2000/svg','defs');
 var grd=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
@@ -189,7 +197,7 @@ document.addEventListener('fullscreenchange',()=>{
 
 <script src='script.js?v=2'></script>
 <script src='draw.js?v=3'></script>
-<script src='run.js?v=5'></script>
-<script src='init.js?v=6'></script>
+<script src='run.js?v=6'></script>
+<script src='init.js?v=8'></script>
 
 </html>
