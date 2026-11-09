@@ -1,9 +1,54 @@
 function run(){
- getAsync('txt/0.txt','',function(){
-  var row=XHR.responseText.split('\n');
-  var sPhrase=row[0]+' '+row[1];
-  var sAuthor=row[1];
-  var wPhrase=0;
+ IS_lock=false;
+ runLoadPhrase();
+}
+
+function runLoadPhrase(){
+ getPhraseData(function(err,sPhrase,sWho){
+  if(err){
+   console.warn('Не удалось загрузить фразу, используем заглушку');
+   return;
+  }
+  console.log('phrase:',sPhrase,'who:',sWho);
+  putPhrase(sPhrase,sWho);
+ });
+}
+
+function getPhraseData(cb){
+ if(IS_lock)return;
+ IS_lock=true;
+ if(A_unguessed.length===0){
+  for(var i=0;i<=N_max_phrase;i++) A_unguessed.push(i+'');
+  A_guessed=[];
+  setLocal('afor_guessed','');
+ }
+ N_curr_phrase=A_unguessed[getRand(0,A_unguessed.length-1)];
+ var doc='txt/'+N_curr_phrase+'.txt';
+ fetch(doc).then(response=>{
+  if(!response.ok){
+   throw new Error('Network response was not ok');
+  }
+  return response.text();
+ }).then(text=>{
+  const lines=text.trim().split(/\r?\n/);
+  const sPhrase=lines[0]||'';
+  const sWho=lines[1]||'';
+  IS_lock=false;
+  if(typeof cb==='function'){
+   cb(null,sPhrase,sWho);
+  }
+ }).catch(err=>{
+  IS_lock=false;
+  console.error('getPhraseData error:',err);
+  if(typeof cb==='function'){
+   cb(err,'','');
+  }
+ });
+}
+
+function putPhrase(sPhrase,sWho){
+IMG_JawOpen.style.visibility='visible';
+var wPhrase=0;
   var c=0;
   for(var i=0;i<sPhrase.length;i++){
    var txt=G_phrase.aTxt[c];
@@ -25,9 +70,11 @@ function run(){
   requestAnimationFrame(alignText);
   requestAnimationFrame(setAnim);
   stopSpin();
- });
 }
+
+
 // txt span
+var A_span=[];
 function getTxtSpan(){
  for(var i in A_span){
   var spn=A_span[i];
@@ -79,8 +126,8 @@ if (j == 2 && i == tspans.length - 1) tspan.isAnimEnd = true;
         span.setAttribute('fill','#000');
         animate(span, 500, function() {
          if(span.isAnimEnd===true){
-          imgJawOpen.setAttribute('display','none');
 	  /*** something else ***/
+IMG_JawOpen.style.visibility='hidden';
 	 }
 	});
       }, delay);
@@ -89,46 +136,6 @@ if (j == 2 && i == tspans.length - 1) tspan.isAnimEnd = true;
     letterIndex++; // двигаем общий счётчик
   }
 }
-
-/*for(var j=0;j<2;j++){
-var txtPhrase = G_phrase.aTxt[j];
-var ptJaw = transformPointBetweenElements(SVG_arena, txtPhrase, 230, 230);
-
-var tspans = txtPhrase.getElementsByTagName('tspan');
-
-// ПЕРВЫЙ проход: только измеряем позиции, ничего не трогаем
-var positions = [];
-for (var i = 0; i < tspans.length; i++) {
-  var str = tspans[i].textContent;
-  if (!str || !str.trim()) { positions[i] = null; continue; }
-  positions[i] = tspans[i].getStartPositionOfChar(0);
-}
-
-// ВТОРОЙ проход: расставляем dx/dy и запускаем полёт
-for (var i = 0; i < tspans.length; i++) {
-  if (!positions[i]) continue;
-
-  let tspan = tspans[i];
-  var pt = positions[i];
-
-  tspan.setAttribute('x', pt.x);
-  tspan.setAttribute('y', pt.y);
-
-  var dx = ptJaw.x - pt.x;
-  var dy = ptJaw.y - pt.y;
-
-  tspan.setAttribute('dx', dx);
-  tspan.setAttribute('dy', dy);
-  tspan.dX = dx;
-  tspan.dY = dy;
-
-  (function(span, delay) {
-    setTimeout(function() {
-      animate(span, 500, function() {});
-    }, delay);
-  })(tspan, 60 * i);
-}
-}*/
 }
 
 function animate(unt,nSpeed,fAnimEnd){

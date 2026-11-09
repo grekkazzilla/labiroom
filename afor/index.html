@@ -80,38 +80,22 @@ const SVG_arena=document.getElementById('svgArena');
 SVG_arena.setAttribute('viewBox', '0 0 '+W+' '+H);
 SVG_arena.style.maxWidth=W+'px';
 SVG_arena.style.maxHeight=H+'px';
-//
-const img=document.createElementNS('http://www.w3.org/2000/svg','image');
-img.setAttribute('href','arena.png');
-img.setAttribute('x','0');
-img.setAttribute('y','0');
-img.setAttribute('width',W);
-img.setAttribute('height',H);
-SVG_arena.appendChild(img);
-//
-const imgJawOpen=document.createElementNS('http://www.w3.org/2000/svg','image');
-imgJawOpen.setAttribute('href','scull_jaw_open.png');
-imgJawOpen.setAttribute('x','0');
-imgJawOpen.setAttribute('y','41');
-imgJawOpen.setAttribute('width',323);
-imgJawOpen.setAttribute('height',252);
-SVG_arena.appendChild(imgJawOpen);
 // pale gradient
 const DFS=document.createElementNS('http://www.w3.org/2000/svg','defs');
 var grd=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
-grd.setAttribute('id','grdPale');
+grd.setAttribute('id','grdPic');
 grd.setAttribute('x1','0');
 grd.setAttribute('y1','0');
 grd.setAttribute('x2','0');
 grd.setAttribute('y2','1');
 var stp=document.createElementNS('http://www.w3.org/2000/svg','stop');
 stp.setAttribute('offset', '0%');
-stp.setAttribute('stop-color', '#fff');
+stp.setAttribute('stop-color', '#a0a0a0');
 stp.setAttribute('stop-opacity', '1');
 grd.appendChild(stp);
 var stp=document.createElementNS('http://www.w3.org/2000/svg','stop');
 stp.setAttribute('offset','100%');
-stp.setAttribute('stop-color','#eee8aa');
+stp.setAttribute('stop-color','#000');
 stp.setAttribute('stop-opacity','1');
 grd.appendChild(stp);
 DFS.appendChild(grd);
@@ -120,9 +104,7 @@ SVG_arena.appendChild(DFS);
 const G_spin=document.createElementNS('http://www.w3.org/2000/svg','g');
 var pth=document.createElementNS('http://www.w3.org/2000/svg','path');
 G_spin.appendChild(pth);
-G_spin.x=462;
-G_spin.y=78;
-var clr='url(#grdPale)';
+var clr='url(#grdPic)';
 SVG_arena.appendChild(G_spin);
 pth.setAttribute('fill',clr);
 pth.setAttribute('stroke',clr);
@@ -132,6 +114,8 @@ G_spin.isOn=true;
 G_spin.z=1;
 G_spin.w=G_spin.getBBox().width*G_spin.z;
 G_spin.h=G_spin.getBBox().height*G_spin.z;
+G_spin.x=W/2-G_spin.w/2;
+G_spin.y=H/2-G_spin.h/2;
 G_spin.setAttribute('transform','translate('+G_spin.x+','+G_spin.y+') scale('+G_spin.z+')');
 //
 function animSpin(isReset){
@@ -195,9 +179,9 @@ document.addEventListener('fullscreenchange',()=>{
 //
 </script>
 
-<script src='script.js?v=2'></script>
-<script src='draw.js?v=3'></script>
-<script src='run.js?v=6'></script>
-<script src='init.js?v=8'></script>
+<script src='aux.js?v=3'></script>
+<script src='draw.js?v=4'></script>
+<script src='run.js?v=8'></script>
+<script src='init.js?v=9'></script>
 
 </html>

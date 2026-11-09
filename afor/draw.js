@@ -178,7 +178,7 @@ function jumpG(arg,x,y,isSet){
  if(arg.r!==undefined && arg.r!=0){
   sRotate='rotate('+arg.r+','+arg.w/2+','+arg.h/2+')';
  }
- arg.setAttribute('transform','translate('+x+','+y+') '+sZoom+' '+sRotate);
+ arg.setAttribute('transform','translate('+x+','+y+') '+sRotate+' '+sZoom);
 }
 
 function turnG(arg,r,isSet){
