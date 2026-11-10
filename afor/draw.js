@@ -222,17 +222,17 @@ function zoomG(arg,z,isSet){
  var y=arg.y+arg.w*(1-zy)/2;
  if(arg.r===undefined) var sRotate='rotate(0)';
  else var sRotate='rotate('+arg.r+','+arg.w/2+','+arg.h/2+')';
- arg.setAttribute('transform','translate('+x+','+y+') '+sZoom+' '+sRotate);
+ arg.setAttribute('transform','translate('+x+','+y+') '+sRotate+' '+sZoom);
  if(isSet===true){
   arg.x=x;
   arg.y=y;
  }
 }
 
-function getGrid(nGrid,pnt){
+function getGrid(gRoot,w,h,nGrid,clr){
  if(pnt===undefined) pnt="#c0c0c0";
- for(var i=0;i<W+1;i=i+nGrid) getLin(G_root,i,0,i,H,pnt,1);
- for(var i=0;i<H+1;i=i+nGrid) getLin(G_root,0,i,W,i,pnt,1);
+ for(var i=0;i<w+1;i=i+nGrid) getLin(gRoot,i,0,i,h,clr,1);
+ for(var i=0;i<h+1;i=i+nGrid) getLin(gRoot,0,i,w,i,clr,1);
 }
 
 function getPic(id,gRoot,x,y,w,h,aPicData,aFrameStyle,isOn,d){
