@@ -71,6 +71,7 @@ Vanitas vanitatis et omnia vanitas.
 </body>
 <script>
 //
+const IS_prod=false;
 const W=766;
 const H=386;
 //
@@ -177,11 +178,17 @@ document.addEventListener('fullscreenchange',()=>{
  }
 });
 //
+if(IS_prod) var aScript=['bundle.min'];
+else var aScript=['aux','draw','run','init'];
+function loadScript(){
+ fetch(aScript.shift()+'.js').then(response => response.text()).then((response) => {
+  var tagScript=document.createElement('script');
+  tagScript.innerHTML=response;
+  document.getElementsByTagName('head')[0].appendChild(tagScript);
+  if(aScript.length>0) loadScript();
+ }).catch(err => console.log(err))
+}
+loadScript();
 </script>
-
-<script src='aux.js?v=3'></script>
-<script src='draw.js?v=4'></script>
-<script src='run.js?v=9'></script>
-<script src='init.js?v=9'></script>
 
 </html>
