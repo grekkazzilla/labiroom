@@ -230,7 +230,7 @@ function zoomG(arg,z,isSet){
 }
 
 function getGrid(gRoot,w,h,nGrid,clr){
- if(pnt===undefined) pnt="#c0c0c0";
+ if(clr===undefined) clr="#c0c0c0";
  for(var i=0;i<w+1;i=i+nGrid) getLin(gRoot,i,0,i,h,clr,1);
  for(var i=0;i<h+1;i=i+nGrid) getLin(gRoot,0,i,w,i,clr,1);
 }

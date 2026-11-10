@@ -1,20 +1,9 @@
 function run(){
  IS_lock=false;
- runLoadPhrase();
+ reqPhrase();
 }
 
-function runLoadPhrase(){
- getPhraseData(function(err,sPhrase,sWho){
-  if(err){
-   console.warn('Не удалось загрузить фразу, используем заглушку');
-   return;
-  }
-  console.log('phrase:',sPhrase,'who:',sWho);
-  putPhrase(sPhrase,sWho);
- });
-}
-
-function getPhraseData(cb){
+function reqPhrase(){
  if(IS_lock)return;
  IS_lock=true;
  if(A_unguessed.length===0){
@@ -23,35 +12,26 @@ function getPhraseData(cb){
   setLocal('afor_guessed','');
  }
  N_curr_phrase=A_unguessed[getRand(0,A_unguessed.length-1)];
- var doc='txt/'+N_curr_phrase+'.txt';
- fetch(doc).then(response=>{
-  if(!response.ok){
-   throw new Error('Network response was not ok');
-  }
+ fetch('txt/'+N_curr_phrase+'.txt').then(response=>{
+  if(!response.ok) throw new Error('Network response was not ok');
   return response.text();
  }).then(text=>{
   const lines=text.trim().split(/\r?\n/);
   const sPhrase=lines[0]||'';
   const sWho=lines[1]||'';
-  IS_lock=false;
-  if(typeof cb==='function'){
-   cb(null,sPhrase,sWho);
-  }
+  putPhrase(sPhrase,sWho);
  }).catch(err=>{
-  IS_lock=false;
-  console.error('getPhraseData error:',err);
-  if(typeof cb==='function'){
-   cb(err,'','');
-  }
+  console.error('reqPhrase error:',err);
+  IS_lock=false;   // не оставляем игру замороженной
  });
 }
 
 function putPhrase(sPhrase,sWho){
-IMG_JawOpen.style.visibility='visible';
-var wPhrase=0;
-var c=0;
+ IMG_JawOpen.style.visibility='visible';
+ var wPhrase=0;
+ var c=0;
+ var txt=getTxt('',G_phrase.gInner,0,30*c,'#fff','start');
  for(var i=0;i<sPhrase.length;i++){
-  var txt=G_phrase.aTxt[c];
   var chr=sPhrase.charAt(i);
   var spn=getSVG(null,'tspan');
   if(isInArray(chr.toLowerCase(),A_char)===true){
@@ -61,12 +41,15 @@ var c=0;
    spn.innerHTML=chr;
    spn.style.fontSize='28px';
   }
-  spn.x_=spn.getBBox().x;
   var wPhrase=txt.getBBox().width;
-  if(wPhrase>250 && chr==' ') c++;
+  if(wPhrase>250 && chr==' '){
+   c++;
+   var txt=getTxt('',G_phrase.gInner,0,30*c,'#fff','start');
+  }
   txt.appendChild(spn);
  }
  requestAnimationFrame(function(){
+  stopSpin();
   // align
   var wText=G_phrase.gInner.getBBox().width;
   var hText=G_phrase.gInner.getBBox().height;
@@ -77,8 +60,9 @@ var c=0;
   G_phrase.gInner.yPos=yText;
   // setting chars ready to fly
   var letterIndex=0; // one general counter for all lines
-  for(var j=0;j<3;j++){
-   var txtPhrase=G_phrase.aTxt[j];
+  var aText=G_phrase.gInner.getElementsByTagName('text');
+  for(var j=0;j<aText.length;j++){
+   var txtPhrase=aText[j];
    var ptJaw=transformPointBetweenElements(SVG_arena,txtPhrase,233,243);
    var tspans=txtPhrase.getElementsByTagName('tspan');
    // 1st loop : only measuring, no moving
@@ -102,15 +86,13 @@ var c=0;
     tspan.setAttribute('fill','transparent');
     tspan.dX=dx;
     tspan.dY=dy;
-    if(j==2 && i==tspans.length-1) tspan.isAnimEnd=true;
+    if(j==aText.length-1 && i==tspans.length-1) tspan.isAnimEnd=true;
     else tspan.isAnimEnd=false;
     (function(span,delay){
      setTimeout(function(){
       span.setAttribute('fill','#000');
-      stopSpin();
       animate(span,500,function(){
        if(span.isAnimEnd===true){
-        /*** something else ***/
         IMG_JawOpen.style.visibility='hidden';
        }
       });
@@ -178,4 +160,8 @@ function exeAnim(unt){
    requestAnimationFrame(function(){exeAnim(unt);});
   }
  }
+}
+
+function play(){
+
 }

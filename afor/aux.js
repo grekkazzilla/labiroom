@@ -82,7 +82,7 @@ function tst(str_00,str_01,str_02,str_03,str_04){
 function rndStr(qty){
  var sFrom='qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890';
  var sRand='';
- while(sRand.length<qty) sRand+=sFrom.charAt(getRnd(0,sFrom.length));
+ while(sRand.length<qty) sRand+=sFrom.charAt(getRand(0,sFrom.length));
  return sRand;}
 
 function isInArray(e,arr){for(var i in arr) if(e==arr[i]) return true;return false;}

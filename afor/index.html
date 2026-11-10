@@ -178,15 +178,15 @@ document.addEventListener('fullscreenchange',()=>{
  }
 });
 //
-if(IS_prod) var aScript=['bundle.min'];
-else var aScript=['aux','draw','run','init'];
+var aScript=IS_prod ? ['bundle.min'] : ['aux','draw','run','init'];
 function loadScript(){
- fetch(aScript.shift()+'.js').then(response => response.text()).then((response) => {
-  var tagScript=document.createElement('script');
-  tagScript.innerHTML=response;
-  document.getElementsByTagName('head')[0].appendChild(tagScript);
-  if(aScript.length>0) loadScript();
- }).catch(err => console.log(err))
+ if(aScript.length===0) return;
+ var name=aScript.shift()+'.js';
+ var tag=document.createElement('script');
+ tag.src=name;
+ tag.onload=function(){loadScript();};
+ tag.onerror=function(){console.error('Не загрузился скрипт:',name);};
+ document.head.appendChild(tag);
 }
 loadScript();
 </script>
