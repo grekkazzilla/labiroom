@@ -1,3 +1,5 @@
+// ***** init.js ***** //
+
 var IS_lock=true;
 const A_char=['а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','э','ю','я'];
 let G_phrase=null;
@@ -66,6 +68,8 @@ downloadImages(
     y+=h+m;
     c=0;
    }
+   btn.chr=A_char[i];
+   btn.style.cursor='pointer';
    btn.onclick=play; // function play() in run.js
   }
   // g score

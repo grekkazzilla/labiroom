@@ -1,8 +1,9 @@
+// ***** run.js : start the game
 function run(){
  IS_lock=false;
  reqPhrase();
 }
-
+// ***** run.js : request a new phrase from the server async
 function reqPhrase(){
  if(IS_lock)return;
  IS_lock=true;
@@ -22,23 +23,24 @@ function reqPhrase(){
   putPhrase(sPhrase,sWho);
  }).catch(err=>{
   console.error('reqPhrase error:',err);
-  IS_lock=false;   // не оставляем игру замороженной
+  IS_lock=false;   // unlocked
  });
 }
-
+// ***** run.js : show the phrase on the screen and set it up for animation
 function putPhrase(sPhrase,sWho){
  IMG_JawOpen.style.visibility='visible';
- var wPhrase=0;
  var c=0;
  var txt=getTxt('',G_phrase.gInner,0,30*c,'#fff','start');
  for(var i=0;i<sPhrase.length;i++){
   var chr=sPhrase.charAt(i);
   var spn=getSVG(null,'tspan');
+  spn.chr=chr;
   if(isInArray(chr.toLowerCase(),A_char)===true){
-   spn.innerHTML='•';
-   spn.style.fontSize='45px';    
+   spn.textContent='•';
+   //spn.style.fontSize='45px';    
+   spn.style.fontSize='28px';
   } else {
-   spn.innerHTML=chr;
+   spn.textContent=chr;
    spn.style.fontSize='28px';
   }
   var wPhrase=txt.getBBox().width;
@@ -51,13 +53,14 @@ function putPhrase(sPhrase,sWho){
  requestAnimationFrame(function(){
   stopSpin();
   // align
-  var wText=G_phrase.gInner.getBBox().width;
-  var hText=G_phrase.gInner.getBBox().height;
-  var xText=G_phrase.w/2-wText/2;
-  var yText=G_phrase.h/2-hText/2;
-  G_phrase.gInner.setAttribute('transform','translate('+xText+','+yText+')');
-  G_phrase.gInner.xPos=xText;
-  G_phrase.gInner.yPos=yText;
+  //var wText=G_phrase.gInner.getBBox().width;
+  //var hText=G_phrase.gInner.getBBox().height;
+  //var xText=G_phrase.w/2-wText/2;
+  //var yText=G_phrase.h/2-hText/2;
+  //G_phrase.gInner.setAttribute('transform','translate('+xText+','+yText+')');
+  //G_phrase.gInner.xPos=xText;
+  //G_phrase.gInner.yPos=yText;
+  centerPhrase();
   // setting chars ready to fly
   var letterIndex=0; // one general counter for all lines
   var aText=G_phrase.gInner.getElementsByTagName('text');
@@ -91,9 +94,10 @@ function putPhrase(sPhrase,sWho){
     (function(span,delay){
      setTimeout(function(){
       span.setAttribute('fill','#000');
-      animate(span,500,function(){
+      animPhrase(span,500,function(){
        if(span.isAnimEnd===true){
         IMG_JawOpen.style.visibility='hidden';
+	IS_lock=false;
        }
       });
      },delay);
@@ -103,8 +107,8 @@ function putPhrase(sPhrase,sWho){
   }
  });
 }
-
-function animate(unt,nSpeed,fAnimEnd){
+// ***** run.js : animate the phrase as if the letters fly along
+function animPhrase(unt,nSpeed,fAnimEnd){
  if(unt.dX==0 && unt.dY==0){  // буква уже в цели — не считаем 0/0
   unt.onAnimEnd=fAnimEnd;
   unt.onAnimEnd();
@@ -121,7 +125,7 @@ function animate(unt,nSpeed,fAnimEnd){
  unt.lastT=null;           // время прошлого кадра, заполнится на первом тике
  unt.onAnimEnd=fAnimEnd;
  exeAnim(unt);
-} // ***************************************************************************************
+}
 function exeAnim(unt){
  var now=performance.now();
  if(unt.lastT===null) unt.lastT=now;
@@ -161,7 +165,57 @@ function exeAnim(unt){
   }
  }
 }
-
+// ***** run.js : guessing the letters by entering keys from the char pad 
 function play(){
-
+ if(!IS_lock){
+  var aText=G_phrase.gInner.getElementsByTagName('text');
+  for(var i=0;i<aText.length;i++){
+   var txt=aText[i];
+   var aSpan=txt.getElementsByTagName('tspan');
+   for(var j=0;j<aSpan.length;j++){
+    var spn=aSpan[j];
+    if(spn.textContent=='•' && this.chr==spn.chr.toLowerCase()){
+     spn.textContent=spn.chr;
+     spn.style.fontSize='28px';         
+    }
+   }
+  }
+  normalizePhrase();
+ }
 }
+// ***** run.js : снять следы, строка разложится заново
+function normalizePhrase(){
+ var aText=G_phrase.gInner.getElementsByTagName('text');
+ for(var j=0;j<aText.length;j++){
+  var txt=aText[j];
+  txt.removeAttribute('dy');
+  txt.style.alignmentBaseline='auto';
+  txt.style.dominantBaseline='auto';
+  var tspans=txt.getElementsByTagName('tspan');
+  for(var i=0;i<tspans.length;i++){
+   tspans[i].removeAttribute('x');
+   tspans[i].removeAttribute('y');
+   tspans[i].removeAttribute('dx');
+   tspans[i].removeAttribute('dy');
+  }
+ }
+ // пересобрать центровку под новую (натуральную) раскладку
+ //var wText=G_phrase.gInner.getBBox().width;
+ //var hText=G_phrase.gInner.getBBox().height;
+ //var xText=G_phrase.w/2-wText/2;
+ //var yText=G_phrase.h/2-hText/2;
+ //G_phrase.gInner.setAttribute('transform','translate('+xText+','+yText+')');
+ //G_phrase.gInner.xPos=xText;
+ //G_phrase.gInner.yPos=yText;
+ centerPhrase();
+}
+// ***** run.js : центровка по фактическому содержимому
+function centerPhrase(){
+ var bb=G_phrase.gInner.getBBox();
+ var xText=G_phrase.w/2-bb.width/2-bb.x;
+ var yText=G_phrase.h/2-bb.height/2-bb.y;
+ G_phrase.gInner.setAttribute('transform','translate('+xText+','+yText+')');
+ G_phrase.gInner.xPos=xText;
+ G_phrase.gInner.yPos=yText;
+}
+

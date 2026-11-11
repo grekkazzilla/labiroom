@@ -1,4 +1,4 @@
-///////////////////// DRAW ////////////////////
+// ***** draw.js ***** //
 
 function makeSVG(root,w,h,isDfs,id){
  var svg=getSVG(root,'svg');
