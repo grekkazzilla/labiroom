@@ -88,7 +88,7 @@ downloadImages(
    var txt=getTxt('come back later',SVG_arena,510,240,'#fff','middle');
    txt.style.fontSize='25px';
    txt.style.fontStyle='italic';
-   run();
+   //run();
   }
  }
 );
