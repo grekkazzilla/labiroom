@@ -181,7 +181,7 @@ document.addEventListener('fullscreenchange',()=>{
 var aScript=IS_prod ? ['bundle.min'] : ['aux','draw','run','init'];
 function loadScript(){
  if(aScript.length===0) return;
- var name=aScript.shift()+'.js';
+ var name=aScript.shift()+'.js?v=2';
  var tag=document.createElement('script');
  tag.src=name;
  tag.onload=function(){loadScript();};

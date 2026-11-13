@@ -1,5 +1,4 @@
 // ***** init.js ***** //
-
 var IS_lock=true;
 const A_char=['а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','э','ю','я'];
 let G_phrase=null;
@@ -7,9 +6,12 @@ const N_max_phrase=12;
 let N_curr_phrase=undefined;
 var A_unguessed=[];
 for(var i=0;i<=N_max_phrase;i++) A_unguessed.push(i+'');
-var A_guessed=getLocal('afor_guessed','').split('~');
-if(A_guessed.length===1 && A_guessed[0]==='') A_guessed=[];
-A_unguessed=spliceArrayByMatches(A_unguessed,A_guessed);
+// the list of guessed phrases lives in afor_state now — it is restored by putState()
+var A_guessed=[];
+let N_efforts=3;
+let N_score=0;
+let S_who='';
+var A_pressed=[];   // every letter the player has pressed in the current phrase
 //
 let IMG=[
  ['arena.png',0,0,W,H,SVG_arena,'IMG_arena'],
@@ -76,19 +78,26 @@ downloadImages(
   var gScore=getG(SVG_arena,85,310,1,true,'gScore');
   var txt=getTxt('000',gScore,0,0,'#000','middle');
   txt.style.fontSize='28px';
-  // g efforts
-  var gEffort=getG(SVG_arena,85,350,1,true,'gEffort');
-  var txt=getTxt('• • •',gEffort,0,0,'#000','middle');
-  txt.style.fontSize='45px';
+  // ***** init.js : three dots showing how many efforts there are left to try
+  var gEffort=getG(SVG_arena,85,350,1,true,'gEfforts');
+  var txt=getTxt('',gEffort,0,0,'#000','middle');
+  for(var i=0;i<3;i++){
+   var spn=getSVG(txt,'tspan');
+   spn.textContent='• ';
+   spn.style.fontSize='45px';
+  }
+  // btn next
+  var btn=getG(SVG_arena,435,240,1,false,'btnNext');
+  getRct(btn,0,0,150,35,5,'transparent','#fff',1);
+  txt=getTxt('дальше >',btn,75,16,'url(#grdPale)','middle');
+  txt.style.fontSize='28px';
+  txt.style.fontStyle='italic';
+  btn.onclick=run;
+  btn.style.cursor='pointer';
   //
   if(!IS_prod){
-   var txt=getTxt('not working now',SVG_arena,510,210,'#fff','middle');
-   txt.style.fontSize='25px';
-   txt.style.fontStyle='italic';
-   var txt=getTxt('come back later',SVG_arena,510,240,'#fff','middle');
-   txt.style.fontSize='25px';
-   txt.style.fontStyle='italic';
-   //run();
+   // restore the saved state, or start a fresh game if there is none
+   //putState();
   }
  }
 );
