@@ -97,6 +97,12 @@ downloadImages(
   //
   if(!IS_prod){
    // restore the saved state, or start a fresh game if there is none
+   var txt=getTxt('not working now',SVG_arena,510,210,'#fff','middle');
+   txt.style.fontSize='25px';
+   txt.style.fontStyle='italic';
+   var txt=getTxt('come back later',SVG_arena,510,240,'#fff','middle');
+   txt.style.fontSize='25px';
+   txt.style.fontStyle='italic';
    //putState();
   }
  }
