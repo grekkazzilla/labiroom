@@ -26,7 +26,6 @@ function $(s){
  const el=document.getElementById(s);
  if(!el){
   const msg='⚠️ Не найден ID: '+s;
-  if(!IS_prod) alert(msg);
   ttt(msg);
  }
  return el;
@@ -40,7 +39,6 @@ function $$(s,root,num){
  const el=list[num];
  if(!el){
   const msg='⚠️ $$ не нашёл: <'+s+'> в '+(root.id||'[root]');
-  if(!IS_prod) alert(msg);
   ttt(msg);
  }
  return el;
