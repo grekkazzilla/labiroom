@@ -41,6 +41,7 @@ gGearB.r=24;
 turnG(gGearB,gGearB.r);
 // 2nd head div -> sitename and slogan
 var div=aDiv[1];
+div.style.fontSize='20px';
 var spn=div.getElementsByTagName('span')[0];
 spn.style.color='#bdb76d';
 spn.style.fontStyle='italic';
