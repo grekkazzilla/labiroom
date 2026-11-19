@@ -347,3 +347,314 @@ function $$$(root,sTag){
  if(typeof root=='string') root=$(root);
  return root.getElementsByTagName(sTag);
 }
+// ***** DrawSVG.js : box
+var BOX=null;
+function makeBox(dataXY,dataWH,dataBtn,r,dataPnt,isOn,gRoot,id){
+ if(dataBtn===null) var wBx=dataWH[0],hBx=dataWH[1];
+ else{
+  var wBtn=dataBtn[0];
+  var hBtn=dataBtn[1];
+  var qW=dataBtn[2];
+  var qH=dataBtn[3];
+  var mBtn=dataBtn[4];
+  if(mBtn===null) mBtn=(dataWH[0]-qW*wBtn)/(qW+1);
+  if(dataWH===null || dataWH[0]===null) var wBx=wBtn*qW+mBtn*(qW+1); 
+  else var wBx=dataWH[0];
+  if(dataWH===null || dataWH[1]===null) var hBx=hBtn*qH+mBtn*(qH+1);
+  else var hBx=dataWH[1];}
+ if(dataXY===null || dataXY[0]===null) var x=(W-wBx)/2;
+ else var x=dataXY[0];
+ if(dataXY===null || dataXY[1]===null) var y=(H-hBx)/2;
+ else var y=dataXY[1];
+ var bx=getG(gRoot,x,y,1,isOn);
+ if(dataPnt===null){
+  getRct(bx,0,0,wBx,hBx,r,'#808080','none',0).setAttribute('filter','url(#blr2)');
+  getRct(bx,0,0,wBx,hBx,r,'#fff','none',0);}
+ else getRct(bx,0,0,wBx,hBx,r,dataPnt[0],dataPnt[1],dataPnt[2]);
+ if(dataBtn!==null){
+  bx.mBtn=mBtn;
+  bx.x0=getBoxBtnX(0,wBtn,mBtn);
+  bx.x1=getBoxBtnX(1,wBtn,mBtn);
+  bx.x2=getBoxBtnX(2,wBtn,mBtn);
+  bx.x3=getBoxBtnX(3,wBtn,mBtn);
+  bx.x4=getBoxBtnX(4,wBtn,mBtn);
+  bx.x5=getBoxBtnX(5,wBtn,mBtn);
+  bx.x6=getBoxBtnX(6,wBtn,mBtn);
+  bx.x7=getBoxBtnX(7,wBtn,mBtn);
+  bx.x8=getBoxBtnX(8,wBtn,mBtn);
+  bx.x9=getBoxBtnX(9,wBtn,mBtn);
+  bx.y0=getBoxBtnY(0,hBtn,mBtn);
+  bx.y1=getBoxBtnY(1,hBtn,mBtn);
+  bx.y2=getBoxBtnY(2,hBtn,mBtn);
+  bx.y3=getBoxBtnY(3,hBtn,mBtn);
+  bx.y4=getBoxBtnY(4,hBtn,mBtn);
+  bx.y5=getBoxBtnY(5,hBtn,mBtn);
+  bx.y6=getBoxBtnY(6,hBtn,mBtn);
+  bx.y7=getBoxBtnY(7,hBtn,mBtn);
+  bx.y8=getBoxBtnY(8,hBtn,mBtn);
+  bx.y9=getBoxBtnY(9,hBtn,mBtn);
+  bx.w1=getBoxBtnW(1,wBtn,mBtn);
+  bx.w2=getBoxBtnW(2,wBtn,mBtn);
+  bx.w3=getBoxBtnW(3,wBtn,mBtn);
+  bx.w4=getBoxBtnW(4,wBtn,mBtn);
+  bx.w5=getBoxBtnW(5,wBtn,mBtn);
+  bx.w6=getBoxBtnW(6,wBtn,mBtn);
+  bx.w7=getBoxBtnW(7,wBtn,mBtn);
+  bx.w8=getBoxBtnW(8,wBtn,mBtn);
+  bx.h1=getBoxBtnW(1,hBtn,mBtn);
+  bx.h2=getBoxBtnW(2,hBtn,mBtn);
+  bx.h3=getBoxBtnW(3,hBtn,mBtn);
+  bx.h4=getBoxBtnW(4,hBtn,mBtn);
+  bx.h5=getBoxBtnW(5,hBtn,mBtn);}
+ bx.w=wBx,bx.h=hBx;
+ bx.wBtn=wBtn,bx.hBtn=hBtn;
+ if(id!==undefined) bx.id=id;
+ return bx;}
+function getBoxButtonX(n,wBtn,mBtn){return mBtn+(wBtn+mBtn)*n;}
+function getBoxButtonY(n,hBtn,mBtn){return mBtn+(hBtn+mBtn)*n;}
+function getBoxButtonW(n,wBtn,mBtn){return wBtn*n+mBtn*(n-1);}
+function getBoxButtonH(n,hBtn,mBtn){return hBtn*n+mBtn*(n-1);}
+function popBox(arg){
+ if(typeof arg=='string') arg=document.getElementById(arg);
+ if(arg==BX){
+  hideG(arg);
+  BX=null;
+ }
+ else{
+  if(BX!==null) hideG(BX);
+  showG(arg);
+  BX=arg;
+ }
+}
+// ***** DrawSVG.js : button
+function getButton(gRoot,x,y,w,h,ctg,dataPic,go,dTxt,isOn,id){
+var btn=getG(gRoot,x,y,1,isOn);
+if(id!==undefined) btn.id=id;
+btn.w=w,btn.h=h;
+getRct(btn,0,0,w,h,6,'transparent','none',1);
+getRct(btn,3,3,w-6,h-6,5,'transparent','none',1);
+if(dataPic!==null){
+ for(var i=0;i<dataPic.length;i++){
+  var e=dataPic[i];
+  var s=e[0],z=e[1],x=null,y=null;
+  if(e[2]!==null){
+   x=e[2][0];
+   y=e[2][1];}
+  var pth=getPth(btn,x,y,z,'red','none',25,s);
+  if(pth.x===null) pth.x=(pth.parentNode.w-pth.getBBox().width*pth.z)/2;
+  if(pth.y===null) pth.y=(pth.parentNode.h-pth.getBBox().height*pth.z)/2;
+  pth.setAttribute('transform','translate('+pth.x+','+pth.y+') scale('+pth.z+')');
+ }
+}
+
+if(dTxt!==null){
+ var sPos=dTxt[2];
+ var sA=dTxt[0][0],xA=0,yA=0;
+ if(dTxt[0][1]==null || dTxt[0][1][0]==null) xA=w/2;
+ else xA=dTxt[0][1][0];
+ if(dTxt[0][1]==null || dTxt[0][1][1]==null){
+  if(dTxt[1]===null) yA=h/2;
+  else yA=h/3.2;}
+ else yA=dTxt[0][1][1];
+ getTxt(sA,btn,xA,yA,'transparent',sPos);
+ if(dTxt[1]!==null){
+  var sB=dTxt[1][0],xB=0,yB=0;
+  if(dTxt[1][1]==null || dTxt[1][1][0]==null) xB=w/2;
+  else xB=dTxt[1][1][0];
+  if(dTxt[1][1]==null || dTxt[1][1][1]==null) yB=2*h/2.8;
+  else yB=dTxt[1][1][1];
+  getTxt(sB,btn,xB,yB,'transparent',sPos);}}
+
+btn.go=go;
+btn.onclick=function(){pushBtn(this);}
+setBtn(btn,ctg);
+btn.style.cursor='pointer';
+return btn;}
+
+function setButton(btn,ctg){
+ btn.aOn=new Array();
+ if(ctg.charAt(0)=='a'){
+  $$('rect',btn,0).setAttribute('fill','url(#grdBtn)');
+  btn.aOn.push(['rect',0,'fill','url(#grdBtn)','#bdb76d'])
+  if(ctg.charAt(1)=='b'){
+   $$('rect',btn,1).setAttribute('stroke','url(#grdBtnRvs)');
+   btn.aOn.push(['rect',1,'stroke','url(#grdBtnRvs)','#fff'])
+  }
+  var aPth=btn.getElementsByTagName('path');
+  for(var i=0;i<aPth.length;i++){
+   if(ctg.charAt(2)=='a'){ 
+    aPth[i].setAttribute('fill','url(#grdPale)');
+    btn.aOn.push(['path',i,'fill','url(#grdPale)','#fff'])
+   }
+   if(ctg.charAt(2)=='b'){ 
+    aPth[i].setAttribute('fill','url(#grdPic)');
+    btn.aOn.push(['path',i,'fill','url(#grdPic)','#fff'])
+   } 
+   if(ctg.charAt(2)=='c'){ 
+    aPth[i].setAttribute('fill','transparent');
+    aPth[i].setAttribute('stroke','url(#grdPale)');
+    btn.aOn.push(['path',i,'stroke','url(#grdPale)','#fff'])
+   }
+  }
+  var aTxt=btn.getElementsByTagName('text');
+  for(var i=0;i<aTxt.length;i++){
+   if(ctg.charAt(3)=='a'){ 
+    aTxt[i].setAttribute('fill','url(#grdPale)');
+    btn.aOn.push(['text',i,'fill','url(#grdPale)','#fff'])
+   }
+   if(ctg.charAt(3)=='b'){ 
+    aTxt[i].setAttribute('fill','url(#grdPic)');
+    btn.aOn.push(['text',i,'fill','url(#grdPic)','#fff'])
+   }
+  }
+ }
+ if(ctg.charAt(0)=='b'){
+  $$('rect',btn,0).setAttribute('fill','url(#grdPic)');
+  btn.aOn.push(['rect',0,'fill','url(#grdPic)','#000'])
+  if(ctg.charAt(1)=='b'){
+   $$('rect',btn,1).setAttribute('stroke','url(#grdPicRvs)');
+   btn.aOn.push(['rect',1,'stroke','url(#grdPicRvs)','#fff'])
+  }
+  var aPth=btn.getElementsByTagName('path');
+  for(var i=0;i<aPth.length;i++){
+   if(ctg.charAt(2)=='a'){ 
+    aPth[i].setAttribute('fill','url(#grdPale)');
+    btn.aOn.push(['path',i,'fill','url(#grdPale)','#fff'])
+   }
+  }
+ }
+}
+
+function pushButton(btn){
+ if(IS_lock===false || btn.isLockIgnored===true){
+  IS_lock=true;
+  onBtn(btn,1);
+  setTimeout(function(){
+   onBtn(btn,0);
+   btn.go();
+   if(btn.isToKeepLocked===true) IS_lock=true;
+   else IS_lock=false;
+  },200);
+ }
+}
+
+function onButton(btn,a){ // a: 0 - released button (off/out) look, 1 - pushed button (on) look
+if(btn.aOn){
+ for(var i=0;i<btn.aOn.length;i++){
+  var arr=btn.aOn[i];
+  for(var j=0;j<arr.length;j++){
+   btn.getElementsByTagName(arr[0])[arr[1]].setAttribute(arr[2],arr[a*1+3]);}}}}
+// ***** DrawSVG.js : slider
+function getSlider(gRoot,x,y,w,h,pnt,arr,fnc,isOn,id){
+ var sld=getG(gRoot,x,y,1,isOn,id);
+ var sD_A='M 0 0 H '+w+' V '+h+' H 0 z ';
+ var sD_B='M 10 25 C 10 15,15 10,25 10 H '+(w-25)+' C '+(w-15)+' 10,'+(w-10)+' 15,'+(w-10)+' 25 V '+(h-25)+' C '+(w-10)+' '+(h-15)+','+(w-15)+' '+(h-10)+','+(w-25)+' '+(h-10)+' H 25 C 15 '+(h-10)+',10 '+(h-15)+',10 '+(h-25)+' z';
+ var pth=getPth(sld,0,0,1,'transparent','#808080',2,sD_B);
+ pth.setAttribute('filter','url(#blr2)');
+ var pth=getPth(sld,0,0,1,pnt,'none',0,sD_A+sD_B);
+ pth.setAttribute('fill-rule','evenodd');
+ sld.btn=getG(sld,105,2,1,true);
+ var hBtn=h-4,wBtn=hBtn/1.7;
+ sld.btn.w=wBtn;
+ getRct(sld.btn,0,0,wBtn,hBtn,7,'url(#grdBtn)','none',0);
+ getCrl(sld.btn,wBtn/2,hBtn/2,wBtn/2-5,'url(#grdBtnRvs)','none',1);
+ sld.style.cursor='pointer';
+ //
+ sld.arr=new Array();
+ sld.rctCurr=null;
+ var rct=getRct(sld,0,0,wBtn,h,0,'transparent','green',0);
+ var rct=getRct(sld,w-wBtn,0,wBtn,h,0,'transparent','green',0);
+ var wRct=(w-wBtn*2)/arr.length;
+ for(var i=0;i<arr.length;i++){
+  var rct=getRct(sld,wBtn+i*wRct,0,wRct,h,0,'transparent','red',0);
+  if(i==0) sld.rctA=rct;
+  else if(i==arr.length-1) sld.rctB=rct;
+  rct._x=rct.getAttribute('x')*1;
+  rct._w=rct.getAttribute('width')*1;
+  rct.val=arr[i];
+  sld.arr.push(rct);
+  //
+  if(isTouch()===false){
+   rct.onclick=function(){
+    setSlider(this.parentNode,null,this);
+    this.parentNode.fnc();
+   }
+  }
+ }
+ sld.fnc=fnc;
+ if(isTouch()===true){
+  sld.ontouchmove=function(evt){
+   var bx=this.parentNode;
+   var x=evt.changedTouches[0].clientX;
+   x=x-bx.getBoundingClientRect().left;
+   x=Math.round(x/Z);
+   for(var i in this.arr){
+    var rct=this.arr[i];
+    if(x>rct._x && x<(rct._x+rct._w) && this.rctCurr!=rct){
+     setSlider(this,null,rct);  
+     this.fnc();
+    }
+   }
+  }
+ }
+ return sld;
+}
+
+function setSlider(sld,val,rct){
+ if(rct===null){
+  for(var i in sld.arr){
+   var rct=sld.arr[i];
+   if(rct.val==val) break;
+  }
+ }
+ jumpG(sld.btn,(rct._x+(rct._w-sld.btn.w)/2),sld.btn.y);
+ sld.rctCurr=rct;
+ sld.val=rct.val;
+}
+// ***** DrawSVG.js : toggler
+// MAKE TOGGLE BUTTON AND ACTIONS (300x210)
+function getToggle(root,x,y,w,h,fncDo,strLabel,xText,yText,strAnchor,id){
+var tgl=getG(root,x,y,1,true);
+getRct(tgl,0,0,w,h,0,'transparent','#c0c0c0',0);
+var z=h/210;
+var g=getG(tgl,0,0,z,true);
+var pth=getPth(g,0,0,1,'transparent','#000',5,'M 110.0625 24 C 65.9625 24 30 60.3 30 105 C 30 149.7 65.9625 186 110.0625 186 L 188.0625 186 C 233.3625 186 270 149.7 270 105 C 270 60.3 233.3625 24 188.0625 24 L 110.0625 24 z');
+pth.setAttribute('filter','url(#blr8)');
+getPth(g,0,0,1,'#fff','none',0,'M 37.40625 0 C 16.69923 0 0 20.35021 0 45.65625 L 0 164.34375 C 0 189.64979 16.69923 210 37.40625 210 L 262.59375 210 C 283.30077 210 300 189.64979 300 164.34375 L 300 45.65625 C 300 20.35021 283.30077 0 262.59375 0 L 37.40625 0 z M 110.0625 24 L 188.0625 24 C 233.3625 24 270 60.3 270 105 C 270 149.7 233.3625 186 188.0625 186 L 110.0625 186 C 65.9625 186 30 149.7 30 105 C 30 60.3 65.9625 24 110.0625 24 z');
+getCrl(g,115,105,65,'url(#grdSilver)','none',0);
+getCrl(g,115,105,45,'url(#grdSilverRvs)','none',0);
+getTxt(strLabel,tgl,xText,yText,'url(#grdSilver)',strAnchor); // 60 27 left usually
+tgl.isOn=false;
+tgl.isLock=false;
+tgl.isUnlock=false;
+tgl.style.cursor='pointer';
+tgl.do=fncDo;
+tgl.onclick=function(){pushTgl(this,undefined);}
+if(id!==undefined) tgl.id=id;
+return tgl;}
+
+function pushTgl(tgl,bln){
+if(typeof(tgl)=='string') tgl=$(tgl);
+if((IS_lock===false || tgl.isUnlock===true) && tgl.isLock===false){
+ if(bln===undefined){
+  tgl.isOn=!tgl.isOn;
+  tgl.do();}
+ else tgl.isOn=bln;
+ if(tgl.isOn===true){
+  var strSdw='olive';
+  var strBtn='url(#grdBtn)';
+  var strRvs='url(#grdBtnRvs)';
+  var strTxt='url(#grdPic)';
+  var x=185;}
+ else{
+  var strSdw='#000';
+  var strBtn='url(#grdSilver)';
+  var strRvs='url(#grdSilverRvs)';
+  var strTxt='#c0c0c0';
+  var x=115;}
+ tgl.getElementsByTagName('path')[0].setAttribute('stroke',strSdw);
+ tgl.getElementsByTagName('circle')[0].setAttribute('cx',x);
+ tgl.getElementsByTagName('circle')[0].setAttribute('fill',strBtn);
+ tgl.getElementsByTagName('circle')[1].setAttribute('cx',x);
+ tgl.getElementsByTagName('circle')[1].setAttribute('fill',strRvs);
+ tgl.getElementsByTagName('text')[0].setAttribute('fill',strTxt);}}
