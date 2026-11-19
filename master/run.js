@@ -10,10 +10,10 @@ function run(){
  for(var i in A_unit) hideG(A_unit[i]);
  // ***** hide the cellar border and borders of all other empty playable spots
  var arr=[52,0,1,10,11,20,21,30,31];
- for(var i in arr) $$('rect',A_spot[arr[i]]).setAttribute('stroke-width',0);
+ for(var i in arr) $$(A_spot[arr[i]],'rect').setAttribute('stroke-width',0);
  hideG(ARN);
  // ***** spin if not
- if(G_spin.isOn===false) spin();
+ G_spin.anim();
  // ***** resetting play spots
  SPT_playA=null;
  SPT_playB=null;
@@ -144,10 +144,9 @@ showG('btnMoveBack');
 showG('btnEnd');
 // show the cellar border and borders of all other empty playable spots
 var arr=[52,0,1,10,11,20,21,30,31];
-for(var i in arr) $$('rect',A_spot[arr[i]]).setAttribute('stroke-width',5);
+for(var i in arr) $$(A_spot[arr[i]],'rect').setAttribute('stroke-width',5);
 // txt score
 showG(G_score);
-ARN.appendChild(G_score);
 putScore();
 G_score.onclick=function(){play(A_spot[52]);}
 endMove();
@@ -182,25 +181,24 @@ function endMove(){
   // moveback view
   if(A_state.length==1) var pnt='#909090';
   else var pnt='#c0c0c0';
-  $$('rect','btnMoveBack').setAttribute('stroke',pnt);
-  $$('path','btnMoveBack').setAttribute('stroke',pnt);
+  $$('btnMoveBack','rect').setAttribute('stroke',pnt);
+  $$('btnMoveBack','path').setAttribute('stroke',pnt);
   // txt score view
   if(A_spot[52].aUnit==0){
-   $$('rect',G_score).setAttribute('fill','transparent');
-   $$('rect',G_score).setAttribute('stroke','none');
-   $$('rect',G_score).setAttribute('stroke-width','0');
+   $$(G_score,'rect').setAttribute('fill','transparent');
+   $$(G_score,'rect').setAttribute('stroke','none');
+   $$(G_score,'rect').setAttribute('stroke-width','0');
    var pnt='#c0c0c0';
   }
   else{
-   $$('rect',G_score).setAttribute('fill','#fff');
-   $$('rect',G_score).setAttribute('stroke','green');
-   $$('rect',G_score).setAttribute('stroke-width','5');
+   $$(G_score,'rect').setAttribute('fill','#fff');
+   $$(G_score,'rect').setAttribute('stroke','green');
+   $$(G_score,'rect').setAttribute('stroke-width','5');
    var pnt='#000';
-   ARN.appendChild(G_score);
   }
-  $$('path',G_score,0).setAttribute('fill',pnt);
-  $$('path',G_score,1).setAttribute('fill',pnt);
-  $$('path',G_score,2).setAttribute('fill',pnt);
+  $$(G_score,'path',0).setAttribute('fill',pnt);
+  $$(G_score,'path',1).setAttribute('fill',pnt);
+  $$(G_score,'path',2).setAttribute('fill',pnt);
   //
   if(Othink.isExe===true){
    IS_lock=true;
@@ -310,8 +308,8 @@ animate(unt,50,function(){
  if(this.isLast===true){
   // cancel onmouseover highlighting
   for(var i in SPT_playB.aUnit){
-   $$('rect',SPT_playB.aUnit[i]).setAttribute('stroke','green');
-   $$('rect',SPT_playB.aUnit[i]).setAttribute('stroke-width','0.75');}
+   $$(SPT_playB.aUnit[i],'rect').setAttribute('stroke','green');
+   $$(SPT_playB.aUnit[i],'rect').setAttribute('stroke-width','0.75');}
   SPT_playA=null;
   SPT_playB=null;
   endMove();

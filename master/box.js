@@ -21,9 +21,9 @@ function getBox(dataXY,dataWH,dataBtn,r,dataPnt,isOn,gRoot,id){
  else var y=dataXY[1];
  var bx=getG(gRoot,x,y,1,isOn);
  if(dataPnt===null){
-  getRct(bx,0,0,wBx,hBx,r,'#808080','none',0).setAttribute('filter','url(#blr2)');
-  getRct(bx,0,0,wBx,hBx,r,'#fff','none',0);}
- else getRct(bx,0,0,wBx,hBx,r,dataPnt[0],dataPnt[1],dataPnt[2]);
+  getRect(bx,0,0,wBx,hBx,r,'#808080','none',0).setAttribute('filter','url(#blr2)');
+  getRect(bx,0,0,wBx,hBx,r,'#fff','none',0);}
+ else getRect(bx,0,0,wBx,hBx,r,dataPnt[0],dataPnt[1],dataPnt[2]);
  if(dataBtn!==null){
   bx.mBtn=mBtn;
   bx.x0=getBoxBtnX(0,wBtn,mBtn);

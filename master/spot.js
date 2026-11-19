@@ -48,7 +48,7 @@ function specSpot(x,y,ctg,p,isStartable,isEmptyPlayable,pos){
 var spt=getG(ARN,x,y,1,true);
 spt.w=W_unit;spt.h=H_unit;
 // spot border
-getRct(spt,10,10,W_unit-20,H_unit-20,18,'transparent','#c0c0c0',0);
+getRect(spt,10,10,W_unit-20,H_unit-20,18,'transparent','#c0c0c0',0);
 // spot number
 //getTxt(A_spot.length,spt,W_unit/2,50,'#c0c0c0','middle');
 // category play || cellar || home 
@@ -136,5 +136,6 @@ case 49:spt.nLockOn=undefined;spt.nLockedBy=undefined;break;
 case 50:spt.nLockOn=undefined;spt.nLockedBy=undefined;break;
 case 51:spt.nLockOn=undefined;spt.nLockedBy=undefined;break;
 // cellar bottom spot
-case 52:spt.nLockOn=undefined;spt.nLockedBy=undefined;break;}
+case 52:spt.nLockOn=undefined;spt.nLockedBy=undefined;spt.style.cursor='pointer';break;}
+if(spt.isEmptyPlayable) spt.style.cursor='pointer';
 } // *******************************************************************************************

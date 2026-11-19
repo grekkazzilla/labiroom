@@ -46,11 +46,15 @@ function getInit(){
  btn.onclick=function(){
   if(IS_lock===false && A_state.length>1){
    IS_lock=true;
-   $$('rect',this).setAttribute('stroke','#fff');
-   $$('path',this).setAttribute('stroke','#fff');
+   $$(this,'rect').setAttribute('stroke','#fff');
+   $$(this,'path').setAttribute('stroke','#fff');
+   if(BX!==null) popBx(BX);
+   SPT_playA=null;
+   SPT_playB=null;
+   hideG(G_select);
    setTimeout(function(){
-    $$('rect','btnMoveBack').setAttribute('stroke','#c0c0c0');
-    $$('path','btnMoveBack').setAttribute('stroke','#c0c0c0');
+    $$('btnMoveBack','rect').setAttribute('stroke','#c0c0c0');
+    $$('btnMoveBack','path').setAttribute('stroke','#c0c0c0');
     moveBack();
    },250);
   }
@@ -62,12 +66,12 @@ function getInit(){
  btn.onclick=function(){
   if(IS_lock===false){
    IS_lock=true;
-   $$('rect',this).setAttribute('stroke','#fff');
-   $$('path',this).setAttribute('stroke','#fff');
+   $$(this,'rect').setAttribute('stroke','#fff');
+   $$(this,'path').setAttribute('stroke','#fff');
    if($('btnThink').isOn===true) hideG('btnThink');
    setTimeout(function(){
-    $$('rect','btnEnd').setAttribute('stroke','#c0c0c0');
-    $$('path','btnEnd').setAttribute('stroke','#c0c0c0');
+    $$('btnEnd','rect').setAttribute('stroke','#c0c0c0');
+    $$('btnEnd','path').setAttribute('stroke','#c0c0c0');
     hideG('btnWon');
     popBx('bxEnd');
     ARN.appendChild($('bxEnd'));
@@ -86,22 +90,22 @@ function getInit(){
  // ***** CARD SHIRT
  var dataPic='M 41.5 0 C 39.8 3.7 39 7.7 39 11.7 C 46.2 11.8 54.8 15.4 59.2 19.6 C 62 16.7 64.1 13.3 65.4 9.3 C 58.9 3.8 50.6 0.4 41.5 0 z M 59.2 19.6 C 55.2 23.9 50 26.8 44.1 28 C 45 29.3 46.1 30.5 47.2 31.6 C 48.4 32.9 49.8 34 51.3 35 C 52.3 29 55.1 23.7 59.3 19.7 C 59.3 19.7 59.2 19.7 59.2 19.6 z M 59.3 19.7 C 64.4 26.2 67.6 33 67.7 39.8 C 71.7 39.7 75.7 38.7 79.4 36.9 C 78.7 27.8 75.1 19.7 69.4 13.3 C 65.6 14.7 62.1 16.9 59.3 19.7 z M 67.7 39.8 C 62 39.9 56.2 38.4 51.3 35 C 51 36.5 50.9 38.1 50.9 39.7 C 50.9 41.5 51 43.3 51.3 45 C 56.3 41.5 62 39.8 67.7 39.8 L 67.7 39.8 z M 67.7 39.8 C 67.6 47.6 64.5 54.6 59.3 59.6 C 62.1 62.5 65.6 64.7 69.4 66.1 C 75.1 59.6 78.7 51.4 79.4 42.4 C 75.7 40.7 71.7 39.8 67.7 39.8 z M 59.3 59.6 C 55.3 55.7 52.5 50.7 51.3 45 C 50.1 45.8 48.9 46.9 47.8 48 C 46.5 49.3 45.4 50.7 44.4 52.2 C 50.1 53.1 55.2 55.8 59.2 59.7 L 59.3 59.6 z M 59.2 59.7 C 52.8 64.5 46.2 67.6 39.6 67.6 C 39.6 71.6 40.4 75.6 42.1 79.3 C 51.2 78.8 59.4 75.2 65.8 69.7 C 64.3 65.9 62.1 62.5 59.2 59.7 z M 39.6 67.6 C 39.6 62.2 41.2 56.8 44.4 52.2 C 42.9 51.9 41.3 51.8 39.7 51.8 C 37.9 51.8 36.1 51.9 34.4 52.3 C 33.5 51 32.5 49.8 31.3 48.6 C 30.1 47.4 28.7 46.2 27.2 45.3 C 26.3 50.8 23.8 55.7 20.1 59.6 C 20.1 59.7 20.1 59.7 20.2 59.7 C 24 55.9 28.9 53.3 34.4 52.3 C 37.7 56.9 39.4 62.2 39.6 67.6 L 39.6 67.6 z M 39.6 67.6 C 32 67.6 25.2 64.6 20.2 59.7 C 17.4 62.5 15 65.9 13.6 69.7 C 20 75.2 28.3 78.9 37.4 79.4 C 39 75.6 39.7 71.6 39.6 67.6 z M 20.1 59.6 C 15.1 54.7 11.9 48 11.7 40.5 C 7.7 40.4 3.8 41.3 0.1 42.9 C 0.9 51.9 4.6 60.2 10.3 66.5 C 14.1 64.9 17.4 62.5 20.1 59.6 z M 11.7 40.5 C 17.2 40.5 22.6 42.1 27.2 45.3 C 27.5 43.7 27.6 42.1 27.6 40.6 C 27.6 38.8 27.4 37 27.2 35.2 C 22.5 38.6 17.2 40.3 11.7 40.4 L 11.7 40.5 z M 11.7 40.4 C 12 33.2 15.2 25.1 19.2 20.6 C 16.4 17.8 13 15.6 9.2 14.2 C 3.7 20.8 0.3 29.1 0 38.2 C 3.8 39.8 7.7 40.6 11.7 40.4 z M 19.2 20.6 C 23.2 24.5 26 29.5 27.2 35.2 C 28.3 34.4 29.6 33.3 30.8 32.2 C 32 30.9 33.1 29.5 34.1 28.1 C 28.4 27.2 23.2 24.4 19.3 20.5 L 19.2 20.6 z M 19.3 20.5 C 24.2 15.3 31.2 11.9 38.9 11.7 C 38.8 7.7 37.8 3.8 36 0.1 C 27 0.9 18.9 4.7 12.6 10.5 C 14.1 14.4 16.4 17.8 19.3 20.5 z M 38.9 11.7 C 39.1 17.4 37.5 23.2 34.1 28.1 C 35.6 28.3 37.2 28.5 38.8 28.5 C 40.6 28.5 42.4 28.3 44.1 28 C 40.7 23.1 39 17.4 39 11.7 L 38.9 11.7 z';
  var g=getPic('gShirt',ARN,X_start,Y_start-30,W_unit,H_unit,[1.3,'#fff','none',0],['#fff','#c0c0c0',1,10],false,dataPic);
- var rct=getRct(g,10,10,W_unit-20,H_unit-20,5,'#89ca9d','none',0);
- g.insertBefore(rct,$$('path',g));
+ var rct=getRect(g,10,10,W_unit-20,H_unit-20,5,'#89ca9d','none',0);
+ g.insertBefore(rct,$$(g,'path'));
  // ***** BUTTON THINK (AUTO FINISH)
  var dataPic='M 8.6 0 C 6.8 0 5.4 0.5 4.4 1.3 C 3.2 2.3 2.7 3.6 2.7 5.4 C 2.7 6.6 3 7.5 3.6 8.2 C 4.2 9 5.1 9.4 6.3 9.4 C 6.9 9.4 7.5 9.2 8 8.9 C 8.5 8.5 8.7 8 8.7 7.4 C 8.7 6.5 8.4 6.1 7.7 6.1 C 7.6 6.1 7.5 6.1 7.3 6.2 C 7.1 6.2 6.9 6.3 6.8 6.3 C 6.2 6.3 5.9 5.9 5.9 5.2 C 5.9 4.4 6.2 3.8 6.8 3.3 C 7.4 2.8 8.1 2.6 8.9 2.6 C 10 2.6 10.5 3 10.5 3.8 C 10.5 4 10.4 4.4 10.3 5 L 8.5 11 C 7.6 14.1 6.1 15.7 4 15.7 L 2.9 15.7 C 2.4 15.6 2.1 15.6 1.9 15.6 C 0.7 15.6 -0 16.1 0 17.2 C 0 18.1 0.4 18.7 1.1 19.1 C 1.7 19.5 2.4 19.7 3.3 19.7 C 5.3 19.7 6.9 19.1 8.2 17.9 C 9.5 16.8 10.4 15.3 10.9 13.4 L 11.4 11.5 L 15.7 11.5 C 16.1 12.7 16.2 13.5 16.2 13.8 C 16.2 14.3 16 14.9 15.5 15.7 C 15 16.5 14.7 17 14.7 17.1 C 14.7 17.5 14.9 17.8 15.2 18.1 C 15.4 18.3 15.8 18.5 16.2 18.5 C 16.5 18.5 16.8 18.3 17.2 18 L 19.9 15.4 C 20.5 14.9 20.8 14.4 20.8 13.9 C 20.8 13.1 20.3 12.7 19.3 12.7 L 16.7 4.2 L 16.7 3.5 C 16.7 3.3 16.9 3 17.4 2.6 C 17.9 2.2 18.2 1.8 18.2 1.5 C 18.2 0.7 17.7 0.2 16.8 0.2 C 16.4 0.2 15.9 0.3 15.2 0.3 C 14.6 0.3 14.1 0.4 13.7 0.4 C 13.2 0.4 12.3 0.3 11.2 0.2 C 10.1 0.1 9.2 0 8.6 0 z M 13.6 4.2 C 13.7 4.2 13.8 4.3 13.9 4.6 L 15 8.7 L 12.2 8.7 L 13.3 4.6 C 13.4 4.3 13.5 4.2 13.6 4.2 z';
- var btn=getPic('btnThink',ARN,1655,900,100,100,[3.5,'transparent','lightgreen',1.5],['transparent','lightgreen',4,15],false,dataPic);
+ var btn=getPic('btnThink',LAY,1655,900,100,100,[3.5,'transparent','lightgreen',1.5],['transparent','lightgreen',4,15],false,dataPic);
  btn.style.cursor='pointer';
  btn.onclick=function(){
   if(IS_lock===false){
    IS_lock=true;
-   $$('rect',this).setAttribute('stroke','#fff');
-   $$('path',this).setAttribute('stroke','#fff');
+   $$(this,'rect').setAttribute('stroke','#fff');
+   $$(this,'path').setAttribute('stroke','#fff');
    Othink.isExe=true;
    hideG(G_select);
    setTimeout(function(){
-    $$('rect','btnThink').setAttribute('stroke','lightgreen');
-    $$('path','btnThink').setAttribute('stroke','lightgreen');
+    $$('btnThink','rect').setAttribute('stroke','lightgreen');
+    $$('btnThink','path').setAttribute('stroke','lightgreen');
     hideG('btnThink');
     hideG('btnMoveBack');
     Othink.exe();
@@ -109,10 +113,10 @@ function getInit(){
   }
  }
  // ***** BOX TO END GAME
- getGrd('grdPic','#a0a0a0','#000',1,1,DFS);
- getGrd('grdPicRvs','#505050','#909090',1,1,DFS);
- getGrd('grdPale','#fff','#eee8aa',1,1,DFS);
- var bx=getBox([null,300],null,[140,140,1,1,60],35,['#fff','#808080',6.5],false,ARN,'bxEnd');
+ getLinGrad('grdPic','#a0a0a0','#000',1,1,DFS);
+ getLinGrad('grdPicRvs','#505050','#909090',1,1,DFS);
+ getLinGrad('grdPale','#fff','#eee8aa',1,1,DFS);
+ var bx=getBox([null,300],null,[140,140,1,1,60],35,['#fff','#808080',6.5],false,LAY,'bxEnd');
  // WON
  var dataPic='M 62.28125 0 C 40.177082 -2.3129646e-18 22.25 17.933537 22.25 40.03125 C 22.25 62.14833 40.177082 80.056044 62.28125 80.0625 C 84.378963 80.0625 102.3125 62.14833 102.3125 40.03125 C 102.3125 17.927082 84.378963 0 62.28125 0 z M 243.8125 0 C 221.71479 -2.3129646e-18 203.75 17.933537 203.75 40.03125 C 203.75 62.14833 221.72124 80.056044 243.8125 80.0625 C 265.91667 80.0625 283.84375 62.14833 283.84375 40.03125 C 283.84375 17.927082 265.91021 0 243.8125 0 z M 19.375 176.71875 C 16.896028 176.71875 14.364827 177.18687 11.9375 178.1875 C 2.0538896 182.2933 -2.6057976 193.62285 1.5 203.5 C 25.450486 261.16193 83.875281 298.4375 150.375 298.4375 C 215.48675 298.4375 273.59716 261.37142 298.40625 204 C 302.65407 194.18095 298.14447 182.77262 288.3125 178.53125 C 278.50636 174.27052 267.09157 178.80595 262.84375 188.625 C 244.16754 231.81334 200.019 259.71875 150.375 259.71875 C 99.581893 259.71875 55.177359 231.81231 37.25 188.65625 C 34.15774 181.19997 26.966852 176.71875 19.375 176.71875 z';
  var btn=getBtn(bx,bx.x0,bx.y0,bx.w1,bx.h1,'bbax',[[dataPic,0.25,null]],function(){
@@ -136,19 +140,15 @@ function getInit(){
  var dataPicB='M 40.2 174 L 32.9 177 C 29.6 178.4 26.8 180.5 24.8 183.3 L 12.1 200.3 C 10.7 202.2 10.4 204.8 11.3 207.1 C 12.2 209.3 14.2 210.9 16.6 211.3 L 37.6 214.4 C 41 215 44.5 214.5 47.8 213.2 L 55.1 210.2 C 48.2 199.3 43.1 187.1 40.2 174 z M 259.7 174.5 C 256.8 187.5 251.6 199.7 244.6 210.6 L 251.9 213.7 C 255.1 215 258.7 215.5 262.1 215 L 283.1 211.9 C 285.5 211.6 287.5 209.9 288.4 207.7 C 289.4 205.5 289.1 202.9 287.6 200.9 L 275.1 183.9 C 273 181.1 270.2 178.9 267 177.6 L 259.7 174.5 z M 57.9 214.4 L 52.3 220 C 49.8 222.5 48.1 225.6 47.2 228.9 L 42.1 249.5 C 41.5 251.8 42.2 254.3 43.9 256 C 45.7 257.8 48.1 258.4 50.5 257.8 L 71 252.8 C 74.4 251.9 77.5 250.1 80 247.7 L 85.6 242 C 74.9 234.5 65.5 225.1 57.9 214.4 z M 242 214.4 C 234.5 225.1 225.1 234.5 214.3 242 L 220 247.7 C 222.5 250.2 225.5 251.9 228.9 252.8 L 249.5 257.9 C 251.8 258.5 254.3 257.8 256 256.1 C 257.8 254.4 258.5 251.9 257.9 249.5 L 252.8 229 C 251.9 225.6 250.1 222.5 247.7 220 L 242 214.4 z M 89.4 244.6 L 86.3 251.9 C 85 255.1 84.5 258.7 85 262.1 L 88.1 283.1 C 88.4 285.5 90 287.5 92.3 288.4 C 94.5 289.4 97.1 289.1 99.1 287.6 L 116.1 275.1 C 118.9 273 121.1 270.2 122.4 267 L 125.5 259.7 C 112.4 256.8 100.3 251.6 89.4 244.6 z M 210.2 244.8 C 199.3 251.8 187.1 256.9 174 259.8 L 177 267.1 C 178.4 270.3 180.5 273.1 183.3 275.2 L 200.3 287.8 C 202.2 289.3 204.8 289.6 207.1 288.7 C 209.3 287.8 210.9 285.7 211.3 283.3 L 214.4 262.4 C 215 259 214.5 255.4 213.2 252.2 L 210.2 244.8 z M 130.4 260.7 L 130.4 268.6 C 130.4 272.1 131.4 275.5 133.2 278.5 L 144.1 296.6 C 145.3 298.7 147.6 300 150 300 C 152.4 300 154.7 298.7 155.9 296.6 L 166.9 278.5 C 168.7 275.5 169.7 272.1 169.7 268.6 L 169.7 260.7 C 163.2 261.8 156.7 262.4 150.1 262.4 C 143.4 262.4 137 261.8 130.4 260.7 z';
  var dataPic=dataPicA+' '+dataPicB;
  G_select=getPic('gSelect',ARN,0,0,W_unit,H_unit,[0.3,'green','none',0],['transparent','red',0,15],false,dataPic);
- G_select.insertBefore(getCrl(G_select,W_unit/2,H_unit/2,50,'#fff','green',4),$$('path',G_select));
- getCrl(G_select,W_unit/2,H_unit/2,9,'#fff','none',0);
+ G_select.insertBefore(getCirc(G_select,W_unit/2,H_unit/2,50,'#fff','green',4),$$(G_select,'path'));
+ getCirc(G_select,W_unit/2,H_unit/2,9,'#fff','none',0);
  // ***** G SCORE NUMBERS
- G_score=getG(ARN,W/2-65,915,1,false,'gScore');
+ G_score=getG(LAY,W/2-65,915,1,false,'gScore');
  G_score.w=130;
  G_score.h=70;
- getRct(G_score,0,0,G_score.w,G_score.h,15,'transparent','#c0c0c0',5);
- getPth(G_score,0,0,0,'transparent','none',0,'');
- getPth(G_score,0,0,0,'transparent','none',0,'');
- getPth(G_score,0,0,0,'transparent','none',0,'');
- // *****
- //getWonMax();
+ getRect(G_score,0,0,G_score.w,G_score.h,15,'transparent','#c0c0c0',5);
+ getPath(G_score,0,0,0,'transparent','none',0,'');
+ getPath(G_score,0,0,0,'transparent','none',0,'');
+ getPath(G_score,0,0,0,'transparent','none',0,'');
+ G_score.style.cursor='pointer';
 }
-// *******************************************************************************************
-getInit();
-run();
