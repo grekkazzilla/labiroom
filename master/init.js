@@ -152,3 +152,35 @@ function getInit(){
  getPath(G_score,0,0,0,'transparent','none',0,'');
  G_score.style.cursor='pointer';
 }
+
+function loadScript(url){
+ const script=document.createElement('script');
+ script.src=url;
+ script.type='text/javascript';
+ script.onload=()=>{
+  getInit();
+  run();
+ };
+ script.onerror=()=>{
+  console.error(`Failed to load: ${url}`);
+ };
+ document.head.appendChild(script);
+}
+const S_view=getLocal('master_view','simple');
+if(S_view=='simple'){
+ loadScript('card_unit_simple.js');
+ D=50;
+ $('btnView').textContent='classic view';
+}
+else if(S_view=='classic'){
+ loadScript('card_unit_classic.js');
+ D=30;
+ $('btnView').textContent='simple view';
+}
+$('btnView').onclick=function(){
+ if(S_view=='simple') setLocal('master_view','classic');
+ else if(S_view=='classic') setLocal('master_view','simple');
+ window.location.reload();
+}
+
+

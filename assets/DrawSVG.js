@@ -1,11 +1,23 @@
 // ***** DrawSVG.js
-function getSVG(gRoot,sElm){
+function createSVG(root,w,h,isDfs,id){
+ var svg=getElem(root,'svg');
+ svg.setAttribute('xmlns','http://www.w3.org/2000/svg');
+ svg.style.width=w+'px';
+ svg.style.height=h+'px';
+ svg.setAttribute('width',w);
+ svg.setAttribute('height',h);
+ if(isDfs===true) getElem(svg,'defs');
+ if(id!==undefined) svg.id=id;
+ if(root===null) document.body.appendChild(svg);
+ return svg;}
+
+function getElem(gRoot,sElm){
  var elm=document.createElementNS('http://www.w3.org/2000/svg',sElm);
  if(gRoot!==null) gRoot.appendChild(elm);
  return elm;}
 
 function getG(gRoot,x,y,z,isOn,id){
- var g=getSVG(gRoot,'g');
+ var g=getElem(gRoot,'g');
  if(id!==undefined) g.id=id;
  g.x=x,g.y=y,g.z=z;
  if(isOn===true) showG(g);
@@ -13,7 +25,7 @@ function getG(gRoot,x,y,z,isOn,id){
  return g;}
 
 function getRect(gRoot,x,y,w,h,r,clrFill,clrStroke,wStroke){
- var rct=getSVG(gRoot,'rect');
+ var rct=getElem(gRoot,'rect');
  rct.setAttribute('x',x);
  rct.setAttribute('y',y);
  rct.setAttribute('width',w);
@@ -24,7 +36,7 @@ function getRect(gRoot,x,y,w,h,r,clrFill,clrStroke,wStroke){
  return rct;}
 
 function getLin(gRoot,x0,y0,x1,y1,clrFill,w){
- var lin=getSVG(gRoot,'line');
+ var lin=getElem(gRoot,'line');
  lin.setAttribute('x1',x0);
  lin.setAttribute('y1',y0);
  lin.setAttribute('x2',x1);
@@ -35,7 +47,7 @@ function getLin(gRoot,x0,y0,x1,y1,clrFill,w){
  return lin;}
 
 function getCirc(gRoot,x,y,r,clrFill,clrStroke,nStroke){
- var crl=getSVG(gRoot,'circle');
+ var crl=getElem(gRoot,'circle');
  crl.setAttribute('cx',x);
  crl.setAttribute('cy',y);
  crl.setAttribute('r',r);
@@ -48,7 +60,7 @@ function getStyle(elm,clrFill,clrStroke,wStroke){
  elm.setAttribute('stroke-width',wStroke);}
 
 function getText(sTxt,gRoot,x,y,clrFill,sHor){
- var txt=getSVG(gRoot,'text');
+ var txt=getElem(gRoot,'text');
  txt.setAttribute('x',x);
  txt.setAttribute('y',y);
  txt.setAttribute('font-size','20px');
@@ -63,7 +75,7 @@ function getText(sTxt,gRoot,x,y,clrFill,sHor){
  return txt;}
 
 function getPath(gRoot,x,y,z,clrFill,clrStroke,wStroke,sD){
- var pth=getSVG(gRoot,'path');
+ var pth=getElem(gRoot,'path');
  getStyle(pth,clrFill,clrStroke,wStroke);
  pth.setAttribute('d',sD);
  pth.setAttribute('stroke-linejoin','round');
@@ -77,44 +89,44 @@ function getPath(gRoot,x,y,z,clrFill,clrStroke,wStroke,sD){
  return pth;}
 
 function getLinGrad(id,clr01,clr02,nOpac01,nOpac02,dfs){
- var grd=getSVG(dfs,'linearGradient');
+ var grd=getElem(dfs,'linearGradient');
  grd.id=id;
  grd.setAttribute('x1','0');
  grd.setAttribute('x2','0');
  grd.setAttribute('y1','0');
  grd.setAttribute('y2','1');
- var stp=getSVG(grd,'stop');
+ var stp=getElem(grd,'stop');
  stp.setAttribute('offset','0%');
  stp.setAttribute('stop-color',clr01);
  stp.setAttribute('stop-opacity',nOpac01);
- var stp=getSVG(grd,'stop');
+ var stp=getElem(grd,'stop');
  stp.setAttribute('offset','100%');
  stp.setAttribute('stop-color',clr02);
  stp.setAttribute('stop-opacity',nOpac02);
  return grd;}
 
 function getRadGrad(id,nOffSet01,nOffSet02,clr01,clr02,nOpac01,nOpac02,dfs){
- var rad=getSVG(dfs,'radialGradient');
+ var rad=getElem(dfs,'radialGradient');
  rad.id=id;
  rad.setAttribute('cx','50%');
  rad.setAttribute('cy','50%');
  rad.setAttribute('r','50%');
  rad.setAttribute('fx','50%');
  rad.setAttribute('fy','50%');
- var stp=getSVG(rad,'stop');
+ var stp=getElem(rad,'stop');
  stp.setAttribute('offset',nOffSet01+'%');
  stp.setAttribute('stop-color',clr01);
  stp.setAttribute('stop-opacity',nOpac01);
- var stp=getSVG(rad,'stop');
+ var stp=getElem(rad,'stop');
  stp.setAttribute('offset',nOffSet02+'%');
  stp.setAttribute('stop-color',clr02);
  stp.setAttribute('stop-opacity',nOpac02);
  return rad;}
 
 function getBlur(id,num,dfs){
- var flt=getSVG(dfs,'filter');
+ var flt=getElem(dfs,'filter');
  flt.id=id;
- var gaussBlur=getSVG(flt,'feGaussianBlur');
+ var gaussBlur=getElem(flt,'feGaussianBlur');
  gaussBlur.setAttribute('stdDeviation',num);
  gaussBlur.setAttribute('in','SourceGraphic');}
 
@@ -281,26 +293,29 @@ function getSpin(gRoot,clr,z,w){
  return gSpin;
 }
 // ***** DrawSVG.js : paints (only after a page gets downloaded)
-/*getLinGrad('grdBtnRvs','#bdb76d','#eee8aa',1,1,DFS);
-getLinGrad('grdPic','#a0a0a0','#000',1,1,DFS);
-getLinGrad('grdPicRvs','#505050','#909090',1,1,DFS);
-getLinGrad('grdPale','#fff','#eee8aa',1,1,DFS);
-getLinGrad('grdPaleRvs','#eee8aa','#fff',1,1,DFS);
-getLinGrad('grdSilver','#ececec','#999999',1,1,DFS);
-getLinGrad('grdSilverRvs','#999999','#ececec',1,1,DFS);
-getLinGrad('grdRed','#ff8080','#aa0000',1,1,DFS);
-getLinGrad('grdRedRvs','#aa0000','#ff8080',1,1,DFS);
-getLinGrad('grdGreen','lightgreen','green',1,1,DFS);
-getLinGrad('grdGreenRvs','green','lightgreen',1,1,DFS);
-getLinGrad('grdGoldA','#ffeeaa','#aa8800',1,1,DFS);
-getLinGrad('grdGoldB','#d3bc5f','#2b2200',1,1,DFS);
-getLinGrad('grdA','#ddd8aa','#bdb76d',1,1,DFS);
-getLinGrad('grdB','#a0a0a0','#808080',1,1,DFS);
-getBlur('blr2',2,DFS);
-getBlur('blr3',3,DFS);
-getBlur('blr4',4,DFS);
-getBlur('blr8',8,DFS);
-getBlur('blr12',12,DFS);*/
+function getPaint(dfs){
+ getLinGrad('grdBtn','#eee8aa','#bdb76d',1,1,dfs);
+ getLinGrad('grdBtnRvs','#bdb76d','#eee8aa',1,1,dfs);
+ getLinGrad('grdPic','#a0a0a0','#000',1,1,dfs);
+ getLinGrad('grdPicRvs','#505050','#909090',1,1,dfs);
+ getLinGrad('grdPale','#fff','#eee8aa',1,1,dfs);
+ getLinGrad('grdPaleRvs','#eee8aa','#fff',1,1,dfs);
+ getLinGrad('grdSilver','#ececec','#999999',1,1,dfs);
+ getLinGrad('grdSilverRvs','#999999','#ececec',1,1,dfs);
+ getLinGrad('grdRed','#ff8080','#aa0000',1,1,dfs);
+ getLinGrad('grdRedRvs','#aa0000','#ff8080',1,1,dfs);
+ getLinGrad('grdGreen','lightgreen','green',1,1,dfs);
+ getLinGrad('grdGreenRvs','green','lightgreen',1,1,dfs);
+ //getLinGrad('grdGoldA','#ffeeaa','#aa8800',1,1,dfs);
+ //getLinGrad('grdGoldB','#d3bc5f','#2b2200',1,1,dfs);
+ //getLinGrad('grdA','#ddd8aa','#bdb76d',1,1,dfs);
+ //getLinGrad('grdB','#a0a0a0','#808080',1,1,dfs);
+ getBlur('blr2',2,dfs);
+ //getBlur('blr3',3,dfs);
+ //getBlur('blr4',4,dfs);
+ //getBlur('blr8',8,dfs);
+ //getBlur('blr12',12,dfs);
+}
 // ***** DrawSVG.js : full screen toggle
 /* this line should be inserted in the css file for the svg.fs class:  
  svg.fs{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100vw;height:100dvh;margin:0 !important;}
@@ -347,6 +362,8 @@ function $$$(root,sTag){
  if(typeof root=='string') root=$(root);
  return root.getElementsByTagName(sTag);
 }
+// ***** DrawSVG.js : console messages
+function ttt(){console.log(...arguments);}
 // ***** DrawSVG.js : box
 var BOX=null;
 function makeBox(dataXY,dataWH,dataBtn,r,dataPnt,isOn,gRoot,id){

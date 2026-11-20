@@ -35,7 +35,7 @@ td{border:1px solid #c0c0c0;padding:5px 10px;}
 hr{height:1px;border:none;background-color:#a0a0a0;}
 
 /* sans serif font general*/
-header,h1,h2,button{font-family:Arial,sans serif;}
+header,h1,h2,button,nav ul li a,a.JumpToPage{font-family:Arial,sans serif;}
 
 /* serif font general*/
 p,a,h3,li{font-family:'Times New Roman',serif;}
@@ -48,7 +48,8 @@ h1,h2,h3,ul,ol,a.JumpToPage{text-align:left;}
 
 /* bottom margin general */
 h1,h2,p,table,li,a.JumpToPage,#svgArena,
-img,hr,button{margin-bottom:10px;}
+img,hr,button,nav{margin-bottom:10px;}
+nav ul li{margin-bottom:0;}
 
 /* allow selection general */
 h1,h2,h3,p,ul,ol,li,table td{user-select:text;-webkit-user-select:text;}
@@ -77,8 +78,8 @@ header>div:nth-child(3){
  flex-shrink:0;
 }
 
-/* menu buttons */
-section {
+/* navigation buttons */
+#navButtons {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -89,7 +90,7 @@ section {
   box-sizing: border-box;
   margin-bottom:10px;
 }
-section svg {
+#navButtons svg {
   display: block;
   width: 75px;
   height: auto;

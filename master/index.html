@@ -14,7 +14,7 @@ span.plus{color:green;}
 span.minus{color:red;}
 span.ita{font-style:italic;}
 </style>
-<script src='../assets/DrawSVG.js'></script>
+<script src='../assets/DrawSVG.js?v=1'></script>
 </head>
 <body>
 
@@ -182,8 +182,8 @@ if(SVG_arena.isMaxWH===true){ // for the fullscreen toggler
  SVG_arena.style.maxWidth=SVG_arena.sMaxW;
  SVG_arena.style.maxHeight=SVG_arena.sMaxH;
 }
-const DFS=SVG_arena.getElementsByTagName('defs')[0];
-const G_root=document.getElementById('gRoot');
+const DFS=$$(SVG_arena,'defs')
+const G_root=$('gRoot');
 getLinGrad('grdPale','#fff','#eee8aa',1,1,DFS);
 const G_spin=getSpin(G_root,'url(#grdPale)',2,3);
 G_spin.anim(true);
@@ -194,44 +194,11 @@ $('btnFS').onclick=function(){getFS();};
 <script src='box.js?v=2'></script>
 <script src='btn.js?v=2'></script>
 <script src='spot.js?v=2'></script>
-<!--script src='unit.js?v=2'></script-->
 <script src='score.js?v=2'></script>
 <script src='anim.js?v=2'></script>
 <script src='think.js?v=2'></script>
 <script src='run.js?v=11'></script>
 <script src='won.js?v=7'></script>
 <script src='init.js?v=7'></script>
-
-<script>
-function loadScript(url) {
- const script=document.createElement('script');
- script.src=url;
- script.type='text/javascript';
- script.onload=()=>{
-  getInit();
-  run();
- };
- script.onerror=()=>{
-  console.error(`Failed to load: ${url}`);
- };
- document.head.appendChild(script);
-}
-const S_view=getLocal('master_view','simple');
-if(S_view=='simple'){
- loadScript('card_unit_simple.js');
- D=50;
- $('btnView').textContent='classic view';
-}
-else if(S_view=='classic'){
- loadScript('card_unit_classic.js');
- D=30;
- $('btnView').textContent='simple view';
-}
-$('btnView').onclick=function(){
- if(S_view=='simple') setLocal('master_view','classic');
- else if(S_view=='classic') setLocal('master_view','simple');
- window.location.reload();
-}
-</script>
 
 </html>
