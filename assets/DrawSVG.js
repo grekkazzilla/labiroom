@@ -242,6 +242,10 @@ function getGrid(nGrid,clr){
 }
 
 function getPic(id,gRoot,x,y,w,h,aPicData,aFrameStyle,isOn,d){
+ /*
+ aPicData[z,clrFill,clrStroke,wStroke]
+ aFrameStyle[clrFill,clrStroke,wStroke,nRoundCorner]
+ */
  var g=getG(gRoot,x,y,1,isOn);
  if(id!='') g.id=id;
  g.w=w;
@@ -262,14 +266,16 @@ function getPic(id,gRoot,x,y,w,h,aPicData,aFrameStyle,isOn,d){
  return g;
 }
 // ***** DrawSVG.js : spinner
-function getSpin(gRoot,clr,z,w){
- var gSpin=getG(gRoot,0,0,z,false,'gSpin');
- var pth=getPath(gSpin,0,0,1,clr,clr,w,"M 49.2 0 C 48.5 -0 48 0 47.3 0 C 31.3 0.4 15.7 8.2 6.8 22.8 C -6 43.5 -0.3 72 20.8 84.8 C 39.4 96 64.9 90.9 76.2 71.8 C 86 55.3 81.4 32.7 64.4 22.9 C 50 14.6 30.4 18.7 22.1 33.6 C 15.2 46 18.8 62.6 31.7 69.5 C 41.9 74.9 55.7 71.7 61 60.9 C 64.9 52.8 62.3 41.9 53.6 38.2 C 50.6 36.9 47.1 36.8 44 37.9 C 41 38.9 38.4 41.2 37.3 44.5 C 36.8 46.4 36.9 48.8 37.8 50.7 C 38.6 52.6 40.3 54.1 42.7 54.2 A 0.5 0.5 0 0 0 42.8 53.2 C 40.8 53.1 39.5 51.9 38.7 50.2 C 37.9 48.6 37.8 46.5 38.3 44.8 C 39.2 41.8 41.5 39.8 44.3 38.8 C 47.1 37.8 50.4 38 53.2 39.1 C 61.3 42.6 63.8 52.9 60.1 60.5 C 55 70.8 41.9 73.7 32.1 68.6 C 19.8 62 16.3 46 22.9 34.1 C 31 19.7 50 15.7 63.9 23.8 C 80.4 33.3 84.9 55.3 75.4 71.3 C 64.4 89.9 39.5 94.9 21.3 83.9 C 0.7 71.4 -4.9 43.5 7.6 23.3 C 21.6 0.6 52.4 -5.5 74.8 8.4 C 99.6 23.9 106.1 57.7 90.7 82.1 C 90.1 83.1 89.5 84.1 88.8 85 A 0.5 0.5 0 1 0 89.6 85.6 C 90.3 84.7 91 83.7 91.6 82.7 C 107.3 57.8 100.6 23.4 75.3 7.6 C 67.3 2.6 58.2 0.1 49.2 0 z");
+const DATA_spin="M 49.2 0 C 48.5 -0 48 0 47.3 0 C 31.3 0.4 15.7 8.2 6.8 22.8 C -6 43.5 -0.3 72 20.8 84.8 C 39.4 96 64.9 90.9 76.2 71.8 C 86 55.3 81.4 32.7 64.4 22.9 C 50 14.6 30.4 18.7 22.1 33.6 C 15.2 46 18.8 62.6 31.7 69.5 C 41.9 74.9 55.7 71.7 61 60.9 C 64.9 52.8 62.3 41.9 53.6 38.2 C 50.6 36.9 47.1 36.8 44 37.9 C 41 38.9 38.4 41.2 37.3 44.5 C 36.8 46.4 36.9 48.8 37.8 50.7 C 38.6 52.6 40.3 54.1 42.7 54.2 A 0.5 0.5 0 0 0 42.8 53.2 C 40.8 53.1 39.5 51.9 38.7 50.2 C 37.9 48.6 37.8 46.5 38.3 44.8 C 39.2 41.8 41.5 39.8 44.3 38.8 C 47.1 37.8 50.4 38 53.2 39.1 C 61.3 42.6 63.8 52.9 60.1 60.5 C 55 70.8 41.9 73.7 32.1 68.6 C 19.8 62 16.3 46 22.9 34.1 C 31 19.7 50 15.7 63.9 23.8 C 80.4 33.3 84.9 55.3 75.4 71.3 C 64.4 89.9 39.5 94.9 21.3 83.9 C 0.7 71.4 -4.9 43.5 7.6 23.3 C 21.6 0.6 52.4 -5.5 74.8 8.4 C 99.6 23.9 106.1 57.7 90.7 82.1 C 90.1 83.1 89.5 84.1 88.8 85 A 0.5 0.5 0 1 0 89.6 85.6 C 90.3 84.7 91 83.7 91.6 82.7 C 107.3 57.8 100.6 23.4 75.3 7.6 C 67.3 2.6 58.2 0.1 49.2 0 z";
+function getSpin(gRoot,clr,z,wStroke,w,h,isOn,id){
+ var gSpin=getG(gRoot,0,0,z,isOn,id);
+ var pth=getPath(gSpin,0,0,1,clr,clr,wStroke,DATA_spin);
  gSpin.z=z;
  gSpin.w=gSpin.getBBox().width*gSpin.z;
  gSpin.h=gSpin.getBBox().height*gSpin.z;
- gSpin.x=W/2-gSpin.w/2;
- gSpin.y=H/2-gSpin.h/2;
+ gSpin.x=w/2-gSpin.w/2;
+ gSpin.y=h/2-gSpin.h/2;
+ jumpG(gSpin,gSpin.x,gSpin.y);
  gSpin.anim=function(isRst){
   if(isRst){
    if(this.isOn===true) return;
@@ -385,9 +391,9 @@ function makeBox(dataXY,dataWH,dataBtn,r,dataPnt,isOn,gRoot,id){
  else var y=dataXY[1];
  var bx=getG(gRoot,x,y,1,isOn);
  if(dataPnt===null){
-  getRct(bx,0,0,wBx,hBx,r,'#808080','none',0).setAttribute('filter','url(#blr2)');
-  getRct(bx,0,0,wBx,hBx,r,'#fff','none',0);}
- else getRct(bx,0,0,wBx,hBx,r,dataPnt[0],dataPnt[1],dataPnt[2]);
+  getRect(bx,0,0,wBx,hBx,r,'#808080','none',0).setAttribute('filter','url(#blr2)');
+  getRect(bx,0,0,wBx,hBx,r,'#fff','none',0);}
+ else getRect(bx,0,0,wBx,hBx,r,dataPnt[0],dataPnt[1],dataPnt[2]);
  if(dataBtn!==null){
   bx.mBtn=mBtn;
   bx.x0=getBoxBtnX(0,wBtn,mBtn);
@@ -444,12 +450,16 @@ function popBox(arg){
  }
 }
 // ***** DrawSVG.js : button
-function getButton(gRoot,x,y,w,h,ctg,dataPic,go,dTxt,isOn,id){
+function getButton(gRoot,x,y,w,h,ctg,dataPic,go,dTxt,isOn,id,mFrame,wFrame,nRadiusOut,nRadiusIn){
 var btn=getG(gRoot,x,y,1,isOn);
 if(id!==undefined) btn.id=id;
 btn.w=w,btn.h=h;
-getRct(btn,0,0,w,h,6,'transparent','none',1);
-getRct(btn,3,3,w-6,h-6,5,'transparent','none',1);
+if(mFrame==undefined) mFrame=3;
+if(wFrame==undefined) wFrame=1;
+if(nRadiusOut==undefined) nRadiusOut=6;
+if(nRadiusIn==undefined) nRadiusIn=5;
+getRect(btn,0,0,w,h,nRadiusOut,'transparent','none',1);
+getRect(btn,mFrame,mFrame,w-mFrame*2,h-mFrame*2,nRadiusIn,'transparent','none',wFrame);
 if(dataPic!==null){
  for(var i=0;i<dataPic.length;i++){
   var e=dataPic[i];
@@ -457,7 +467,7 @@ if(dataPic!==null){
   if(e[2]!==null){
    x=e[2][0];
    y=e[2][1];}
-  var pth=getPth(btn,x,y,z,'red','none',25,s);
+  var pth=getPath(btn,x,y,z,'red','none',25,s);
   if(pth.x===null) pth.x=(pth.parentNode.w-pth.getBBox().width*pth.z)/2;
   if(pth.y===null) pth.y=(pth.parentNode.h-pth.getBBox().height*pth.z)/2;
   pth.setAttribute('transform','translate('+pth.x+','+pth.y+') scale('+pth.z+')');
@@ -473,41 +483,46 @@ if(dTxt!==null){
   if(dTxt[1]===null) yA=h/2;
   else yA=h/3.2;}
  else yA=dTxt[0][1][1];
- getTxt(sA,btn,xA,yA,'transparent',sPos);
+ getText(sA,btn,xA,yA,'transparent',sPos);
  if(dTxt[1]!==null){
   var sB=dTxt[1][0],xB=0,yB=0;
   if(dTxt[1][1]==null || dTxt[1][1][0]==null) xB=w/2;
   else xB=dTxt[1][1][0];
   if(dTxt[1][1]==null || dTxt[1][1][1]==null) yB=2*h/2.8;
   else yB=dTxt[1][1][1];
-  getTxt(sB,btn,xB,yB,'transparent',sPos);}}
+  getText(sB,btn,xB,yB,'transparent',sPos);}}
 
 btn.go=go;
-btn.onclick=function(){pushBtn(this);}
-setBtn(btn,ctg);
+btn.onclick=function(){pushButton(this);}
+setButton(btn,ctg);
 btn.style.cursor='pointer';
 return btn;}
 
 function setButton(btn,ctg){
  btn.aOn=new Array();
  if(ctg.charAt(0)=='a'){
-  $$('rect',btn,0).setAttribute('fill','url(#grdBtn)');
+  $$(btn,'rect',0).setAttribute('fill','url(#grdBtn)');
   btn.aOn.push(['rect',0,'fill','url(#grdBtn)','#bdb76d'])
-  if(ctg.charAt(1)=='b'){
-   $$('rect',btn,1).setAttribute('stroke','url(#grdBtnRvs)');
+  if(ctg.charAt(1)=='a'){
+   $$(btn,'rect',1).setAttribute('stroke','url(#grdBtnRvs)');
    btn.aOn.push(['rect',1,'stroke','url(#grdBtnRvs)','#fff'])
   }
   var aPth=btn.getElementsByTagName('path');
   for(var i=0;i<aPth.length;i++){
    if(ctg.charAt(2)=='a'){ 
-    aPth[i].setAttribute('fill','url(#grdPale)');
-    btn.aOn.push(['path',i,'fill','url(#grdPale)','#fff'])
-   }
-   if(ctg.charAt(2)=='b'){ 
     aPth[i].setAttribute('fill','url(#grdPic)');
     btn.aOn.push(['path',i,'fill','url(#grdPic)','#fff'])
    } 
-   if(ctg.charAt(2)=='c'){ 
+   else if(ctg.charAt(2)=='b'){ 
+    aPth[i].setAttribute('fill','url(#grdPale)');
+    btn.aOn.push(['path',i,'fill','url(#grdPale)','#fff'])
+   }
+   else if(ctg.charAt(2)=='c'){ 
+    aPth[i].setAttribute('fill','transparent');
+    aPth[i].setAttribute('stroke','url(#grdPic)');
+    btn.aOn.push(['path',i,'stroke','url(#grdPic)','#fff'])
+   }
+   else if(ctg.charAt(2)=='d'){ 
     aPth[i].setAttribute('fill','transparent');
     aPth[i].setAttribute('stroke','url(#grdPale)');
     btn.aOn.push(['path',i,'stroke','url(#grdPale)','#fff'])
@@ -516,12 +531,12 @@ function setButton(btn,ctg){
   var aTxt=btn.getElementsByTagName('text');
   for(var i=0;i<aTxt.length;i++){
    if(ctg.charAt(3)=='a'){ 
-    aTxt[i].setAttribute('fill','url(#grdPale)');
-    btn.aOn.push(['text',i,'fill','url(#grdPale)','#fff'])
-   }
-   if(ctg.charAt(3)=='b'){ 
     aTxt[i].setAttribute('fill','url(#grdPic)');
     btn.aOn.push(['text',i,'fill','url(#grdPic)','#fff'])
+   }
+   if(ctg.charAt(3)=='b'){ 
+    aTxt[i].setAttribute('fill','url(#grdPale)');
+    btn.aOn.push(['text',i,'fill','url(#grdPale)','#fff'])
    }
   }
  }
@@ -545,9 +560,9 @@ function setButton(btn,ctg){
 function pushButton(btn){
  if(IS_lock===false || btn.isLockIgnored===true){
   IS_lock=true;
-  onBtn(btn,1);
+  onButton(btn,1);
   setTimeout(function(){
-   onBtn(btn,0);
+   onButton(btn,0);
    btn.go();
    if(btn.isToKeepLocked===true) IS_lock=true;
    else IS_lock=false;
@@ -566,24 +581,24 @@ function getSlider(gRoot,x,y,w,h,pnt,arr,fnc,isOn,id){
  var sld=getG(gRoot,x,y,1,isOn,id);
  var sD_A='M 0 0 H '+w+' V '+h+' H 0 z ';
  var sD_B='M 10 25 C 10 15,15 10,25 10 H '+(w-25)+' C '+(w-15)+' 10,'+(w-10)+' 15,'+(w-10)+' 25 V '+(h-25)+' C '+(w-10)+' '+(h-15)+','+(w-15)+' '+(h-10)+','+(w-25)+' '+(h-10)+' H 25 C 15 '+(h-10)+',10 '+(h-15)+',10 '+(h-25)+' z';
- var pth=getPth(sld,0,0,1,'transparent','#808080',2,sD_B);
+ var pth=getPath(sld,0,0,1,'transparent','#808080',2,sD_B);
  pth.setAttribute('filter','url(#blr2)');
- var pth=getPth(sld,0,0,1,pnt,'none',0,sD_A+sD_B);
+ var pth=getPath(sld,0,0,1,pnt,'none',0,sD_A+sD_B);
  pth.setAttribute('fill-rule','evenodd');
  sld.btn=getG(sld,105,2,1,true);
  var hBtn=h-4,wBtn=hBtn/1.7;
  sld.btn.w=wBtn;
- getRct(sld.btn,0,0,wBtn,hBtn,7,'url(#grdBtn)','none',0);
+ getRect(sld.btn,0,0,wBtn,hBtn,7,'url(#grdBtn)','none',0);
  getCrl(sld.btn,wBtn/2,hBtn/2,wBtn/2-5,'url(#grdBtnRvs)','none',1);
  sld.style.cursor='pointer';
  //
  sld.arr=new Array();
  sld.rctCurr=null;
- var rct=getRct(sld,0,0,wBtn,h,0,'transparent','green',0);
- var rct=getRct(sld,w-wBtn,0,wBtn,h,0,'transparent','green',0);
+ var rct=getRect(sld,0,0,wBtn,h,0,'transparent','green',0);
+ var rct=getRect(sld,w-wBtn,0,wBtn,h,0,'transparent','green',0);
  var wRct=(w-wBtn*2)/arr.length;
  for(var i=0;i<arr.length;i++){
-  var rct=getRct(sld,wBtn+i*wRct,0,wRct,h,0,'transparent','red',0);
+  var rct=getRect(sld,wBtn+i*wRct,0,wRct,h,0,'transparent','red',0);
   if(i==0) sld.rctA=rct;
   else if(i==arr.length-1) sld.rctB=rct;
   rct._x=rct.getAttribute('x')*1;
@@ -632,15 +647,15 @@ function setSlider(sld,val,rct){
 // MAKE TOGGLE BUTTON AND ACTIONS (300x210)
 function getToggle(root,x,y,w,h,fncDo,strLabel,xText,yText,strAnchor,id){
 var tgl=getG(root,x,y,1,true);
-getRct(tgl,0,0,w,h,0,'transparent','#c0c0c0',0);
+getRect(tgl,0,0,w,h,0,'transparent','#c0c0c0',0);
 var z=h/210;
 var g=getG(tgl,0,0,z,true);
-var pth=getPth(g,0,0,1,'transparent','#000',5,'M 110.0625 24 C 65.9625 24 30 60.3 30 105 C 30 149.7 65.9625 186 110.0625 186 L 188.0625 186 C 233.3625 186 270 149.7 270 105 C 270 60.3 233.3625 24 188.0625 24 L 110.0625 24 z');
+var pth=getPath(g,0,0,1,'transparent','#000',5,'M 110.0625 24 C 65.9625 24 30 60.3 30 105 C 30 149.7 65.9625 186 110.0625 186 L 188.0625 186 C 233.3625 186 270 149.7 270 105 C 270 60.3 233.3625 24 188.0625 24 L 110.0625 24 z');
 pth.setAttribute('filter','url(#blr8)');
-getPth(g,0,0,1,'#fff','none',0,'M 37.40625 0 C 16.69923 0 0 20.35021 0 45.65625 L 0 164.34375 C 0 189.64979 16.69923 210 37.40625 210 L 262.59375 210 C 283.30077 210 300 189.64979 300 164.34375 L 300 45.65625 C 300 20.35021 283.30077 0 262.59375 0 L 37.40625 0 z M 110.0625 24 L 188.0625 24 C 233.3625 24 270 60.3 270 105 C 270 149.7 233.3625 186 188.0625 186 L 110.0625 186 C 65.9625 186 30 149.7 30 105 C 30 60.3 65.9625 24 110.0625 24 z');
+getPath(g,0,0,1,'#fff','none',0,'M 37.40625 0 C 16.69923 0 0 20.35021 0 45.65625 L 0 164.34375 C 0 189.64979 16.69923 210 37.40625 210 L 262.59375 210 C 283.30077 210 300 189.64979 300 164.34375 L 300 45.65625 C 300 20.35021 283.30077 0 262.59375 0 L 37.40625 0 z M 110.0625 24 L 188.0625 24 C 233.3625 24 270 60.3 270 105 C 270 149.7 233.3625 186 188.0625 186 L 110.0625 186 C 65.9625 186 30 149.7 30 105 C 30 60.3 65.9625 24 110.0625 24 z');
 getCrl(g,115,105,65,'url(#grdSilver)','none',0);
 getCrl(g,115,105,45,'url(#grdSilverRvs)','none',0);
-getTxt(strLabel,tgl,xText,yText,'url(#grdSilver)',strAnchor); // 60 27 left usually
+getText(strLabel,tgl,xText,yText,'url(#grdSilver)',strAnchor); // 60 27 left usually
 tgl.isOn=false;
 tgl.isLock=false;
 tgl.isUnlock=false;

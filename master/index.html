@@ -185,7 +185,7 @@ if(SVG_arena.isMaxWH===true){ // for the fullscreen toggler
 const DFS=$$(SVG_arena,'defs')
 const G_root=$('gRoot');
 getLinGrad('grdPale','#fff','#eee8aa',1,1,DFS);
-const G_spin=getSpin(G_root,'url(#grdPale)',2,3);
+const G_spin=getSpin(G_root,'url(#grdPale)',2,3,W,H,false);
 G_spin.anim(true);
 $('btnFS').onclick=function(){getFS();};
 </script>
