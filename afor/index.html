@@ -34,8 +34,10 @@
 каждая фраза станет маленьким испытанием.
 </p>
 
+<div id='game-board'>
 <svg id='svgArena'></svg>
-<p style='text-align:center;'><button id='btnFS' style='padding:0 5px 0 5px;'>на весь экран</button></p>
+<button id='btnFS'>на весь экран</button>
+</div>
 
 <h2>Правила</h2>
 <p> &#8226 Цель игры &#8211 набрать как можно больше очков, угадывая фразы.</p>
@@ -147,7 +149,7 @@ function animSpin(isReset){
 function stopSpin(){G_spin.isOn=false;}
 animSpin(true);
 //
-const A_display=[
+/*const A_display=[
  document.getElementsByTagName('h1')[0],
  document.getElementsByTagName('header')[0],
  document.getElementsByTagName('footer')[0],
@@ -183,7 +185,8 @@ document.addEventListener('fullscreenchange',()=>{
   document.body.style.height='';
   document.body.style.background='';
  }
-});
+});*/
+$('btnFS').onclick=function(){getFS();};
 getPaint(DFS);
 </script>
 <script src='aux.js'></script>
