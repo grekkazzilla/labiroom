@@ -7,6 +7,7 @@
 <meta name='description' content='Логические игры в браузере: Color Lines, пасьянс Мастерский, шахматы, игра со словами Афоризбука. Без скачивания и регистрации, есть полноэкранный режим.'>
 <link rel='icon' type='image/svg+xml' href='assets/fav.svg'>
 <link type='text/css' rel='stylesheet' href='assets/style.css?v=8'>
+<link type='text/css' rel='stylesheet' href='assets/MarkerSVG.css?v=8'>
 <script type='text/javascript' src='assets/DrawSVG.js?v=2'></script>
 
 <!-- Yandex.Metrika counter -->
@@ -33,10 +34,11 @@
  <svg id='navigation-button'></svg>
  <nav id='header-navigation'>
   <ul>
-   <li><a href='lines/'>Шары / Цветные линии</a></li>	
-   <li><a href='master/'>Пасьянс Мастерский</a></li>	
-   <li><a href='chess/'>Шахматы (варианты)</a></li>	
-   <li><a href='afor/'>Игра со словами Афоризбука</a></li>	
+   <li class='home'><a href='.'>Главная</a></li>	
+   <li class='lines'><a href='lines/'>Шары / Цветные линии</a></li>	
+   <li class='spade'><a href='master/'>Пасьянс Мастерский</a></li>	
+   <li class='chess'><a href='chess/'>Шахматы (варианты)</a></li>	
+   <li class='scull'><a href='afor/'>Игра со словами Афоризбука</a></li>	
   </ul>
  </nav>
 </header>
@@ -85,11 +87,5 @@ getPaint(DFS);
 
 <script type='text/javascript' src='assets/HeaderAndFooter.js?v=1'></script>
 <script type='text/javascript' src='assets/MenuButtons.js?v=4'></script>
-
-<script>
-PIC_logo.isOn=false;
-PIC_logo.nSpeed=50;
-PIC_logo.anim(true);
-</script>
 
 </html>
