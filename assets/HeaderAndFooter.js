@@ -9,7 +9,6 @@ svg.style.width=wSvg+'px';
 svg.style.height=wSvg+'px';
 var pic=getSpin(svg,'url(#grdBtn)',0.5,8,wSvg,wSvg,true);
 jumpG(pic,4,pic.y);
-G_spin.anim(true);
 // ***** Header.js : 2nd element -> sitename
 var div=$$(header,'div');
 // ***** Header.js : 3rd element -> navigation button
