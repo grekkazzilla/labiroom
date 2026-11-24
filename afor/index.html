@@ -149,43 +149,6 @@ function animSpin(isReset){
 function stopSpin(){G_spin.isOn=false;}
 animSpin(true);
 //
-/*const A_display=[
- document.getElementsByTagName('h1')[0],
- document.getElementsByTagName('header')[0],
- document.getElementsByTagName('footer')[0],
- ...document.querySelectorAll('h2,p')
-].filter(el=>el!==undefined);
-//
-BTN_fs.addEventListener('click',()=>{
- const elem=document.documentElement;
- if (elem.requestFullscreen) {
-  elem.requestFullscreen();
- }
- else if(elem.webkitRequestFullscreen){
-  elem.webkitRequestFullscreen();
- }
- else if(elem.msRequestFullscreen){
-  elem.msRequestFullscreen();
- }
- window.scrollTo({top:0,behavior:'auto'});
-});
-//
-document.addEventListener('fullscreenchange',()=>{
- if (document.fullscreenElement) {
-  A_display.forEach(el=>{if(el)el.style.display='none'});
-  SVG_arena.classList.add('svg-fullscreen-centered');
-  document.body.style.height='95vh';
-  document.body.style.background='radial-gradient(white 0%, white 50%, #eee8aa 100%)';
- }
- else {
-  A_display.forEach(el=>{if(el)el.style.display=''});
-  SVG_arena.classList.remove('svg-fullscreen-centered');
-  SVG_arena.style.maxWidth=W+'px';
-  SVG_arena.style.maxHeight=H+'px';
-  document.body.style.height='';
-  document.body.style.background='';
- }
-});*/
 $('btnFS').onclick=function(){getFS();};
 getPaint(DFS);
 </script>
