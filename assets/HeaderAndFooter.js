@@ -1,12 +1,8 @@
 // ***** Header.js
 var header=$$(document,'header');
-header.style.height='auto';
-header.style.marginBottom='0';
 // ***** Header.js : 1st element -> logo main page link
 var svg=$('logo-picture');
 var wSvg=60;
-svg.style.width=wSvg+'px';
-svg.style.height=wSvg+'px';
 const PIC_logo=getSpin(svg,'url(#grdBtn)',0.5,8,wSvg,wSvg,true);
 jumpG(PIC_logo,4,PIC_logo.y);
 // ***** Header.js : 2nd element -> sitename

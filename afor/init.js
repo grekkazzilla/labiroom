@@ -40,8 +40,8 @@ downloadImages(
   IMG_arena.style.visibility='visible';
   getGrd('grdPale','#fff','#eee8aa',1,1,DFS);
   var clr='url(#grdPale)';
-  $$('path',G_spin).setAttribute('fill',clr);
-  $$('path',G_spin).setAttribute('stroke',clr);
+  $$(G_spin,'path').setAttribute('fill',clr);
+  $$(G_spin,'path').setAttribute('stroke',clr);
   jumpG(G_spin,462,78,true);
   SVG_arena.appendChild(G_spin);
   //

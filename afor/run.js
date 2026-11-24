@@ -6,7 +6,7 @@ function run(){
  }
  var arrG=$('gCharPad').getElementsByTagName('g');
  for(var i=0;i<arrG.length;i++){
-  $$('text',arrG[i]).textContent=arrG[i].chr;
+  $$(arrG[i],'text').textContent=arrG[i].chr;
  }
  N_efforts=3;
  var aSpan=$('gEfforts').getElementsByTagName('tspan');
@@ -237,7 +237,7 @@ function exeAnim(unt){
 }
 // ***** run.js : guessing the letters by entering keys from the char pad
 function play(){
- var txtButton=$$('text',this);
+ var txtButton=$$(this,'text');
  if(!IS_lock && txtButton.textContent!='•'){
   var isWrongGuess=true;
   txtButton.textContent='•';
@@ -276,7 +276,8 @@ function wrongGuess(c,isSet,spnEfforts){
    case 2:var pos=1;break;
    case 1:var pos=2;break;
   }
-  spnEfforts=$$('tspan',$$('text','gEfforts'),pos);
+  //spnEfforts=$$('tspan',$$('text','gEfforts'),pos);
+  spnEfforts=$$($$('gEfforts','text'),'tspan',pos);
   N_efforts--;
   if(N_score>0) N_score--;
   putScore();
@@ -302,7 +303,7 @@ function wrongGuess(c,isSet,spnEfforts){
 function wonGame(c,isSet){
  if(isSet){
   IS_lock=true;
-  $$('text','gScore').setAttribute('fill','lightgreen');
+  $$('gScore','text').setAttribute('fill','lightgreen');
   IMG_JawOpen.style.visibility='visible';
   // commit the win IMMEDIATELY, before any flash — so a refresh during
   // the animation restores the round as finished, with the button
@@ -320,7 +321,7 @@ function wonGame(c,isSet){
   var txt=getTxt(S_who,G_phrase.gInner,350,30*aText.length,'url(#grdPale)','end');
   txt.style.fontSize='28px';
   for(var i=0;i<aText.length;i++) aText[i].style.fontStyle='italic';
-  $$('text','gScore').setAttribute('fill','#000');
+  $$('gScore','text').setAttribute('fill','#000');
   centerPhrase();
   showG('btnNext');
  }
@@ -349,7 +350,7 @@ function putScore(){
  if(N_score<10) sScore='00'+N_score;
  else if(N_score<100) sScore='0'+N_score;
  else sScore=N_score+'';
- $$('text','gScore').textContent=sScore;
+ $$('gScore','text').textContent=sScore;
 }
 // ***** run.js : write the whole game state to localStorage
 function saveState(){
@@ -384,11 +385,11 @@ function putState(){
  // pressed letters — shown as dots on the pad (both hits and misses)
  var arrG=$('gCharPad').getElementsByTagName('g');
  for(var i=0;i<arrG.length;i++){
-  if(isInArray(arrG[i].chr,A_pressed)) $$('text',arrG[i]).textContent='•';
+  if(isInArray(arrG[i].chr,A_pressed)) $$(arrG[i],'text').textContent='•';
  }
 
  // efforts: used ones (from the left) are gray, the rest are black
- var aSpan=$$('text','gEfforts').getElementsByTagName('tspan');
+ var aSpan=$$('gEfforts','text').getElementsByTagName('tspan');
  for(var i=0;i<aSpan.length;i++){
   aSpan[i].setAttribute('fill', i < (3 - N_efforts) ? '#c0c0c0' : '#000');
  }

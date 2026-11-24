@@ -21,7 +21,7 @@ function shuffle(array) {
 
 function isTouch(){return ('ontouchstart' in window);}
 
-
+/*
 function $(s){
  const el=document.getElementById(s);
  if(!el){
@@ -45,6 +45,7 @@ function $$(s,root,num){
 }
 
 function ttt(){console.log(...arguments);}
+*/
 
 function $txt(g,str,num){
  if(num===undefined) num=0;
