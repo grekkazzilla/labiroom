@@ -7,8 +7,8 @@ var svg=$('logo-picture');
 var wSvg=60;
 svg.style.width=wSvg+'px';
 svg.style.height=wSvg+'px';
-var pic=getSpin(svg,'url(#grdBtn)',0.5,8,wSvg,wSvg,true);
-jumpG(pic,4,pic.y);
+const PIC_logo=getSpin(svg,'url(#grdBtn)',0.5,8,wSvg,wSvg,true);
+jumpG(PIC_logo,4,PIC_logo.y);
 // ***** Header.js : 2nd element -> sitename
 var div=$$(header,'div');
 // ***** Header.js : 3rd element -> navigation button

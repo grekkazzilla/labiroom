@@ -281,12 +281,13 @@ function getSpin(gRoot,clr,z,wStroke,w,h,isOn,id){
    if(this.isOn===true) return;
    this.isOn=true;
    this.r=0;
+   if(this.nSpeed==undefined) this.nSpeed=175;
    this.nLastTime=performance.now();
   }
   const nCurrTime=performance.now();
   const nDiff=(nCurrTime-this.nLastTime)/1000;
   this.nLastTime=nCurrTime;
-  this.r+=175*nDiff;
+  this.r+=this.nSpeed*nDiff;
   this.setAttribute('transform','translate('+this.x+','+this.y+') rotate('+this.r+','+(this.w/2)+','+(this.h/2)+') scale('+this.z+')');
   if(this.isOn===true){
    requestAnimationFrame(function(){gSpin.anim(false);});
