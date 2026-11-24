@@ -355,7 +355,7 @@ document.addEventListener('fullscreenchange',()=>{
   }
   document.body.style.height='';
   document.body.style.padding='10px';
-  $$(document,'main').insertBefore(SVG_arena,$('btnFS'));
+  $('game-board').insertBefore(SVG_arena,$('btnFS'));
  }
 });
 // ***** DrawSVG.js : selectors
@@ -541,10 +541,10 @@ function setButton(btn,ctg){
   }
  }
  if(ctg.charAt(0)=='b'){
-  $$('rect',btn,0).setAttribute('fill','url(#grdPic)');
+  $$(btn,'rect',0).setAttribute('fill','url(#grdPic)');
   btn.aOn.push(['rect',0,'fill','url(#grdPic)','#000'])
-  if(ctg.charAt(1)=='b'){
-   $$('rect',btn,1).setAttribute('stroke','url(#grdPicRvs)');
+  if(ctg.charAt(1)=='a'){
+   $$(btn,'rect',1).setAttribute('stroke','url(#grdPicRvs)');
    btn.aOn.push(['rect',1,'stroke','url(#grdPicRvs)','#fff'])
   }
   var aPth=btn.getElementsByTagName('path');

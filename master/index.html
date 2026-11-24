@@ -3,38 +3,51 @@
 <head>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1.0'>
-<title>master solitaire</title>
+<meta name="description" content="Пасьянс Мастерский — играйте онлайн прямо в браузере. Классическая раскладка, понятные правила, чистая реализация на JS и SVG. Есть полноэкранный режим для комфортной игры.">
+<title>Пасьянс Мастерский — играть онлайн без установки | labiroom.ru</title>
 <link rel='icon' type='image/svg+xml' href='../assets/fav.svg'>
-<link rel='stylesheet' href='../assets/style.css?v=11'>
+<link rel='stylesheet' href='../assets/style.css?v=12'>
 <style>
-header{height:0;margin-bottom:0;}
 img.button{width:49px;border-radius:10px;}
-li::before {content:'♦';color:#ff474c;width:15px;}
+main li::before {content:'♦';color:#ff474c;width:15px;}
 span.plus{color:green;}
 span.minus{color:red;}
 span.ita{font-style:italic;}
 </style>
-<script src='../assets/DrawSVG.js?v=1'></script>
+<script src='../assets/DrawSVG.js?v=2'></script>
 </head>
 <body>
 
-<header></header>
+<header>
+ <a href='../' aria-label='Главная'><svg id='logo-picture'></svg></a>
+ <div>labiroom.ru</div>
+ <svg id='navigation-button'></svg>
+ <nav id='header-navigation'>
+  <ul>
+   <li><a href='../lines/'>Шары / Цветные линии</a></li>	
+   <li><a href='../chess/'>Шахматы (варианты)</a></li>	
+   <li><a href='../afor/'>Игра со словами Афоризбука</a></li>	
+  </ul>
+ </nav>
+</header>
+
 
 <main>
-<h1>Пасьянс "Мастерский"</h1>
-<a href='../' class='JumpToPage'>На главную страницу</a>
-<svg id='svgArena'><g id='gRoot'></g><defs></defs></svg>
-<button id='btnFS'>full screen</button>
-<button id='btnView'>classic view</button><br />
+<h1>Пасьянс Мастерский</h1>
 
-<p class='SaidAbout'>
-<img src='../assets/turn.svg' id='picTurn' />
-Для удобства играйте в горизонтальной ориентации экрана (landscape orientation).
+<p>
+Сложный карточный пазл, где придётся изрядно поломать голову.
 </p>
+
+<section id='game-board'>
+<svg id='svgArena'><g id='gRoot'></g><defs></defs></svg>
+<button id='btnFS'>на весь экран</button>
+<button id='btnView'>карты:</button><br />
+</section>
 
 <h2>Об игре</h2>
 <p>
-Сложный карточный пазл, где придётся изрядно поломать голову.
+Встречается также под названием "Шедевр", ещё иногда называется "Подвал". 
 С самого начала все карты открыты и лежат «ковром».
 Главная фишка не в том, чтобы просто раскладывать, а в стратегическом выборе: пытаться довести расклад до конца или вовремя признать, что он нераскладываемый, и пересдать, чтобы не потерять очки.
 Решение «сдаться» сразу — это не проигрыш, а допустимая тактика: ты осознанно теряешь меньше, чем мог бы, и получаешь новый «ковёр».
@@ -50,14 +63,14 @@ span.ita{font-style:italic;}
 52 карты раскладываются как на рисунке ниже.
 Четыре туза кладутся в центр.
 Под тузами находится пустое место, которое называется "подвал".
-<img src='about00.jpg' />
+<img src='about00.jpg' alt='' />
 </li>
 
 <li>
 Цель игры: на четырёх тузов в центральном вертикальном ряду необходимо собрать все карты
 по масти последовательно либо в возрастающем (с двойки до короля),
 либо в убывающем (с короля до двойки) порядке.
-<img src='about01.jpg' />
+<img src='about01.jpg' alt='' />
 </li>
 
 <li>
@@ -69,7 +82,7 @@ span.ita{font-style:italic;}
 Разрешено пользоваться только свободными, крайними боковыми картами.
 Остальные внутренние карты остаются заблокированными,
 пока сами в свою очередь не станут крайними свободными картами по мере того, как ряд будет разбираться.
-<img src='about02.jpg' />
+<img src='about02.jpg' alt='' />
 </li>
 
 <li>
@@ -83,14 +96,14 @@ span.ita{font-style:italic;}
 <li>
 Если боковой ряд с любой из сторон какого-либо туза разобран (пять карт в ряду),
 то на это пустое место можно переложить любую свободную карту (как одиночную, так и пачку).
-<img src='about03.jpg' />
+<img src='about03.jpg' alt='' />
 </li>
 
 <li>
 Пустое место в нижнем горизонтальном ряду посередине называется "подвалом",
 куда можно отправить любую свободную карту, но только одиночную.
 Всю пачку карт в подвал убрать нельзя.
-<img src='about04.jpg' />
+<img src='about04.jpg' alt='' />
 </li>
 
 <li>
@@ -98,7 +111,7 @@ span.ita{font-style:italic;}
 Освободить и убрать карту из подвала можно, если разобрать ряд из четырёх карт с любой стороны "подвала".
 Эти нижние ряды из четырёх карт называются "стенами подвала" (на схеме красным).
 Таким образом, "стены" блокируют карту в "подвале", пока одна из этих "стен" не убрана.
-<img src='about05.jpg' />
+<img src='about05.jpg' alt='' />
 </li>
 
 </ul>
@@ -118,39 +131,39 @@ span.ita{font-style:italic;}
 НО одинаковый порядок (убывающий или возрастающий) на всех четырёх тузах НЕ соблюдён,
 очки не присуждаются (ноль очков).
 Это ничья.
-<img src='about06.jpg' class='button' />
+<img src='about06.jpg' alt='' class='button' />
 </li>
 
 <li>
 Если игрок, сделав ходы (хотя бы один ход), не смог до конца решить расклад и сдался,
 то снимается три очка <span class='minus'>(-3)</span>.
 Это проигрыш.
-<p class='PixInLine'>
-<img src='about10.jpg' class='button' />
-<img src='about08.jpg' class='button' />
-</p>
+<div class='PixInLine'>
+<img src='about10.jpg' alt='' class='button' />
+<img src='about08.jpg' alt='' class='button' />
+</div>
 </li>
 
 <li>
 Если игрок, оценив новый расклад, сразу в самом начале заключил,
 что расклад не имеет решения, и сдался, НЕ сделав ни одного хода,
 тогда снимается только одно очко <span class='minus'>(-1)</span>.
-<p class='PixInLine'>
-<img src='about10.jpg' class='button' />
-<img src='about07.jpg' class='button' />
-</p>
+<div class='PixInLine'>
+<img src='about10.jpg' alt='' class='button' />
+<img src='about07.jpg' alt='' class='button' />
+</div>
 </li>
 
 <li>
 За отмену хода снимается одно очко, но только один раз за игру.
 Таким образом, отмену хода можно делать любое количество раз,
 но за это сгорит всего лишь одно очко <span class='minus'>(-1)</span>.
-<img src='about09.jpg' class='button' />
+<img src='about09.jpg' alt='' class='button' />
 </li>
 
 <li>
 Полная победа присуждается, если игрок наберёт максимально <span id='spn999'>999</span> очков.
-<img src='wonMax.jpg' style='border-radius:10px;' />
+<img src='wonMax.jpg' alt='максимальный выигрыш по очкам 999' style='border-radius:10px;' />
 </li>
 
 <li>
@@ -160,12 +173,25 @@ span.ita{font-style:italic;}
 
 </ul>
 
-<hr />
-<a href='../' class='JumpToPage'>На главную страницу</a>
-
 </main>
 
-<footer></footer>
+<footer>
+ <div class='JumpToPage'>
+  <a href='../' class='JumpToPage'>На главную страницу</a>
+  <a href='#top' class='JumpToPage'>На верх страницы</a>
+ </div>
+ <nav>
+  <ul>
+   <li><a href='../lines/'>Шары / Цветные линии</a></li>	
+   <li><a href='../chess/'>Шахматы (варианты)</a></li>	
+   <li><a href='../afor/'>Игра со словами Афоризбука</a></li>	
+  </ul>
+ </nav>
+ <svg id='head-with-gears'></svg>
+ <svg id='head-with-brain'></svg>
+ <div>hello@labiroom.ru</div>
+ <a href='mailto:hello@labiroom.ru'><svg id='write-a-mail-button'></svg></a>
+</footer>
 
 </body>
 
@@ -188,7 +214,10 @@ getLinGrad('grdPale','#fff','#eee8aa',1,1,DFS);
 const G_spin=getSpin(G_root,'url(#grdPale)',2,3,W,H,false);
 G_spin.anim(true);
 $('btnFS').onclick=function(){getFS();};
+getPaint(DFS);
 </script>
+
+<script src='../assets/HeaderAndFooter.js?v=1'></script>
 
 <script src='script.js?v=3'></script>
 <script src='box.js?v=2'></script>

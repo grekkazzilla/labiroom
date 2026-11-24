@@ -170,12 +170,12 @@ const S_view=getLocal('master_view','simple');
 if(S_view=='simple'){
  loadScript('card_unit_simple.js');
  D=50;
- $('btnView').textContent='classic view';
+ $('btnView').textContent='карты: classic';
 }
 else if(S_view=='classic'){
  loadScript('card_unit_classic.js');
  D=30;
- $('btnView').textContent='simple view';
+ $('btnView').textContent='карты: minimal';
 }
 $('btnView').onclick=function(){
  if(S_view=='simple') setLocal('master_view','classic');
