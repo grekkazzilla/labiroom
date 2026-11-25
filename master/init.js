@@ -170,14 +170,14 @@ const S_view=getLocal('master_view','simple');
 if(S_view=='simple'){
  loadScript('card_unit_simple.js');
  D=50;
- $('btnView').textContent='карты: classic';
+ $('theme-toggle').textContent='карты: classic';
 }
 else if(S_view=='classic'){
  loadScript('card_unit_classic.js');
  D=30;
- $('btnView').textContent='карты: minimal';
+ $('theme-toggle').textContent='карты: minimal';
 }
-$('btnView').onclick=function(){
+$('theme-toggle').onclick=function(){
  if(S_view=='simple') setLocal('master_view','classic');
  else if(S_view=='classic') setLocal('master_view','simple');
  window.location.reload();

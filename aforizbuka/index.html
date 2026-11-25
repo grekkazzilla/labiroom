@@ -6,7 +6,6 @@
 <title>aforizbuka</title>
 <link rel='icon' type='image/svg+xml' href='../assets/fav.svg'>
 <link rel='stylesheet' href='../assets/style.css?v=2'>
-<link rel='stylesheet' href='../assets/MarkerSVG.css?v=2'>
 <script type='text/javascript' src='../assets/DrawSVG.js?v=2'></script>
 <style></style>
 </head>
@@ -18,10 +17,10 @@
  <svg id='navigation-button'></svg>
  <nav id='header-navigation'>
   <ul>
-   <li class='home'><a href='../'>Главная</a></li>	
-   <li class='lines'><a href='../lines/'>Шары / Цветные линии</a></li>	
-   <li class='spade'><a href='../master/'>Пасьянс Мастерский</a></li>	
-   <li class='chess'><a href='../chess/'>Шахматы (варианты)</a></li>	
+   <li><a href='../'>Главная</a></li>	
+   <li><a href='../color-lines/'>Цветные линии</a></li>	
+   <li><a href='../master/'>Пасьянс Мастерский</a></li>	
+   <li><a href='../chess-variants/'>Шахматы</a></li>	
   </ul>
  </nav>
 </header>
@@ -35,8 +34,8 @@
 </p>
 
 <div id='game-board'>
-<svg id='svgArena'></svg>
-<button id='btnFS'>на весь экран</button>
+<svg id='play-arena'></svg>
+<button id='full-screen'>на весь экран</button>
 </div>
 
 <h2>Правила</h2>
@@ -84,9 +83,9 @@ Vanitas vanitatis et omnia vanitas.
 const W=766;
 const H=386;
 //
-const BTN_fs=document.getElementById('btnFS');
+const BTN_fs=document.getElementById('full-screen');
 //
-const SVG_arena=document.getElementById('svgArena');
+const SVG_arena=document.getElementById('play-arena');
 SVG_arena.setAttribute('viewBox', '0 0 '+W+' '+H);
 SVG_arena.style.maxWidth=W+'px';
 SVG_arena.style.maxHeight=H+'px';
@@ -149,7 +148,11 @@ function animSpin(isReset){
 function stopSpin(){G_spin.isOn=false;}
 animSpin(true);
 //
-$('btnFS').onclick=function(){getFS();};
+BTN_fs.onclick=function(){getFS();};
+FNC_fs=function(){
+ if(IS_fs===true) document.documentElement.style.background='radial-gradient(circle at center, white 0%, white 30%, #eee8aa 100%)';
+ else document.documentElement.style.background='';
+}
 getPaint(DFS);
 </script>
 <script src='aux.js'></script>

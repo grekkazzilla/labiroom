@@ -327,6 +327,8 @@ function getPaint(dfs){
 /* this line should be inserted in the css file for the svg.fs class:  
  svg.fs{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100vw;height:100dvh;margin:0 !important;}
  */
+IS_fs=false;
+let FNC_fs=function(){}
 function getFS(){
  document.body.insertBefore(SVG_arena,$$(document,'header'));
   setTimeout(function(){
@@ -339,13 +341,14 @@ function getFS(){
 }
 document.addEventListener('fullscreenchange',()=>{
  const arr=[...document.querySelectorAll('header,main,footer')].filter(el=>el!==undefined);
- if (document.fullscreenElement) {
+ if(document.fullscreenElement){
   arr.forEach(el=>{if(el)el.style.display='none'});
   SVG_arena.classList.add('fs');
   document.body.style.height='95vh';
   document.body.style.padding='0';
+  IS_fs=true;
  }
- else {
+ else{
   var eMain=document.getElementsByTagName('main')[0];
   document.body.style.padding='10px';
   arr.forEach(el=>{if(el)el.style.display=''});
@@ -356,8 +359,10 @@ document.addEventListener('fullscreenchange',()=>{
   }
   document.body.style.height='';
   document.body.style.padding='10px';
-  $('game-board').insertBefore(SVG_arena,$('btnFS'));
+  $('game-board').insertBefore(SVG_arena,$('full-screen'));
+  IS_fs=false;
  }
+ FNC_fs();
 });
 // ***** DrawSVG.js : selectors
 function $(id){return document.getElementById(id)}

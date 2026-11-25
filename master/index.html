@@ -7,7 +7,6 @@
 <title>Пасьянс Мастерский — играть онлайн без установки | labiroom.ru</title>
 <link rel='icon' type='image/svg+xml' href='../assets/fav.svg'>
 <link rel='stylesheet' href='../assets/style.css?v=12'>
-<link rel='stylesheet' href='../assets/MarkerSVG.css?v=1'>
 <style>
 img.button{width:49px;border-radius:10px;}
 main li::before {content:'♦';color:#ff474c;width:15px;}
@@ -40,10 +39,10 @@ span.ita{font-style:italic;}
  <svg id='navigation-button'></svg>
  <nav id='header-navigation'>
   <ul>
-   <li class='home'><a href='../'>Главная</a></li>	
-   <li class='lines'><a href='../lines/'>Шары / Цветные линии</a></li>	
-   <li class='chess'><a href='../chess/'>Шахматы (варианты)</a></li>	
-   <li class='scull'><a href='../afor/'>Игра со словами Афоризбука</a></li>	
+   <li><a href='../'>Главная</a></li>	
+   <li><a href='../color-lines/'>Цветные линии</a></li>	
+   <li><a href='../chess-variants/'>Шахматы</a></li>	
+   <li><a href='../aforizbuka/'>Игра со словами</a></li>	
   </ul>
  </nav>
 </header>
@@ -56,9 +55,9 @@ span.ita{font-style:italic;}
 </p>
 
 <div id='game-board'>
-<svg id='svgArena'><g id='gRoot'></g><defs></defs></svg>
-<button id='btnFS'>на весь экран</button>
-<button id='btnView'>карты:</button><br />
+<svg id='play-arena'><g id='arena-root'></g><defs></defs></svg>
+<button id='full-screen'>на весь экран</button>
+<button id='theme-toggle'>карты: classic</button><br />
 </div>
 
 <h2>Об игре</h2>
@@ -198,9 +197,9 @@ span.ita{font-style:italic;}
  </div>
  <nav>
   <ul>
-   <li><a href='../lines/'>Шары / Цветные линии</a></li>	
-   <li><a href='../chess/'>Шахматы (варианты)</a></li>	
-   <li><a href='../afor/'>Игра со словами Афоризбука</a></li>	
+   <li><a href='../color-lines/'>Цветные линии</a></li>	
+   <li><a href='../chess-variants/'>Шахматы</a></li>	
+   <li><a href='../aforizbuka/'>Игра со словами</a></li>	
   </ul>
  </nav>
  <svg id='head-with-gears'></svg>
@@ -214,7 +213,7 @@ span.ita{font-style:italic;}
 <script>
 const W=1775;
 const H=1055;
-const SVG_arena=document.getElementById('svgArena');
+const SVG_arena=document.getElementById('play-arena');
 SVG_arena.style.background='radial-gradient(green 0%, green 50%, darkgreen 100%)';
 SVG_arena.setAttribute('viewBox', '0 0 '+W+' '+H);
 SVG_arena.isMaxWH=false;
@@ -225,11 +224,11 @@ if(SVG_arena.isMaxWH===true){ // for the fullscreen toggler
  SVG_arena.style.maxHeight=SVG_arena.sMaxH;
 }
 const DFS=$$(SVG_arena,'defs')
-const G_root=$('gRoot');
+const G_root=$('arena-root');
 getLinGrad('grdPale','#fff','#eee8aa',1,1,DFS);
 const G_spin=getSpin(G_root,'url(#grdPale)',2,3,W,H,false);
 G_spin.anim(true);
-$('btnFS').onclick=function(){getFS();};
+$('full-screen').onclick=function(){getFS();};
 getPaint(DFS);
 </script>
 
