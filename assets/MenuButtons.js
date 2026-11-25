@@ -54,7 +54,7 @@ btn.onclick=function(){
    var aLin=$('btnLines').getElementsByTagName('line');
    aLin[0].setAttribute('stroke','#bdb76d');
    aLin[1].setAttribute('stroke','#bdb76d');
-   window.location.href='lines/';
+   window.location.href='color-lines/';
    IS_lock=false;
   },100); 
  }
@@ -130,7 +130,7 @@ btn.onclick=function(){
    aRct[1].setAttribute('stroke','url(#grdBtnRvs)');
    var pth=$('btnChess').getElementsByTagName('path')[0];
    pth.setAttribute('fill','url(#grdPic)');
-   window.location.href='chess/';
+   window.location.href='chess-variants/';
    IS_lock=false;
   },100); 
  }
@@ -156,7 +156,7 @@ btn.onclick=function(){
    aRct[1].setAttribute('stroke','url(#grdBtnRvs)');
    var pth=$('btnAfor').getElementsByTagName('path')[0];
    pth.setAttribute('fill','url(#grdPic)');
-   window.location.href='afor/';
+   window.location.href='aforizbuka/';
    IS_lock=false;
   },100); 
  }
