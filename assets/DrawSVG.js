@@ -330,8 +330,9 @@ function getPaint(dfs){
 IS_fs=false;
 let FNC_fs=function(){}
 function getFS(){
+ IS_fs=true;
  document.body.insertBefore(SVG_arena,$$(document,'header'));
-  setTimeout(function(){
+ setTimeout(function(){
   const elem=document.documentElement;
   if(elem.requestFullscreen){elem.requestFullscreen();}
   else if(elem.webkitRequestFullscreen){elem.webkitRequestFullscreen();}
@@ -344,13 +345,14 @@ document.addEventListener('fullscreenchange',()=>{
  if(document.fullscreenElement){
   arr.forEach(el=>{if(el)el.style.display='none'});
   SVG_arena.classList.add('fs');
+  SVG_arena.style.width='';    // ← remove so that
+  SVG_arena.style.height='';   // ← class .fs takes over control
   document.body.style.height='95vh';
   document.body.style.padding='0';
   IS_fs=true;
  }
  else{
   var eMain=document.getElementsByTagName('main')[0];
-  document.body.style.padding='10px';
   arr.forEach(el=>{if(el)el.style.display=''});
   SVG_arena.classList.remove('fs');
   if(SVG_arena.isMaxWH===true){
@@ -364,6 +366,48 @@ document.addEventListener('fullscreenchange',()=>{
  }
  FNC_fs();
 });
+// ***** DrawSVG.js : zoom
+function setZoom(){
+ if(typeof SVG_arena==='undefined' || !SVG_arena) return; // SVG ещё не в DOM
+ if(IS_fs===false){
+  //var wPage=document.documentElement.clientWidth-20;
+  //var hPage=document.documentElement.clientHeight;
+  var wPage=window.innerWidth-20;
+  if(wPage>700) wPage=700;
+  var hPage=window.innerHeight;
+  var zWidth=wPage/W;
+  var zHeight=hPage/H;
+  //if(zWidth>zHeight) Z=zHeight;
+  //else if(zWidth<zHeight) Z=zWidth;
+  Z=Math.min(zWidth,zHeight);
+  SVG_arena.setAttribute('width',wPage);
+  SVG_arena.setAttribute('height',hPage);
+  SVG_arena.style.width=W*Z+'px';
+  SVG_arena.style.height=H*Z+'px';
+  G_root.setAttribute('transform','scale('+Z+')');
+  SVG_arena.setAttribute('viewBox', '0 0 '+W*Z+' '+H*Z);
+ }
+}
+/*window.addEventListener('load',function(){
+ document.body.onorientationchange=function(){setZoom();}
+ document.body.onresize=function(){setZoom();}
+});*/
+//window.addEventListener('resize',setZoom);
+//window.addEventListener('orientationchange',setZoom);
+
+// ***** DrawSVG.js : zoom listeners
+var t;
+function queueZoom(){
+ setZoom();                 // reacting instantly
+ clearTimeout(t);
+ t=setTimeout(setZoom,50); // controlling once again for a screen orientation change
+}
+window.addEventListener('resize',queueZoom);
+if(typeof ResizeObserver!=='undefined'){
+ new ResizeObserver(queueZoom).observe(document.documentElement);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setZoom);
+else setZoom(); // if the ext script is sourced in the end of the <body>
 // ***** DrawSVG.js : selectors
 function $(id){return document.getElementById(id)}
 function $$(root,sTag,pos){

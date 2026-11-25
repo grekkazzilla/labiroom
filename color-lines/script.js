@@ -18,11 +18,11 @@ function shuffle(array) {
 }
 
 function isTouch(){return ('ontouchstart' in window);}
-function $(s){return document.getElementById(s);}
+/*function $(s){return document.getElementById(s);}
 function $$(s,root,num){
  if(typeof root=='string') root=$(root);
  if(num===undefined) num=0;
- return root.getElementsByTagName(s)[num];}
+ return root.getElementsByTagName(s)[num];}*/
 function $txt(g,str,num){
  if(num===undefined) num=0;
  g.getElementsByTagName('text')[num].firstChild.nodeValue=str;}

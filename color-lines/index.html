@@ -4,34 +4,55 @@
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1.0'>
 <title>Color Lines Game Puzzle</title>
+<meta name="description" content="Цветные линии с шарами — играйте онлайн прямо в браузере. Понятные правила и стратегия для успешной игры, чистая реализация на JS и SVG. Есть полноэкранный режим для комфортной игры.">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114252557', 'ym');
+
+    ym(114252557, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/114252557" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <link rel='icon' type='image/svg+xml' href='../assets/fav.svg'>
-<link type='text/css' rel='stylesheet' href='style.css?v=1'>
-<style type='text/css'>
-svg{width:400px;height:600px;border:0px solid red;}
-</style>
-<!--script type='text/javascript' src='../script.js?v=1'></script-->
+<link rel='stylesheet' href='../assets/style.css'>
+<style></style>
+<script src='../assets/DrawSVG.js'></script>
 </head>
-<body onload='init();'>
+
+<body>
+
+<header>
+ <a href='../' aria-label='Главная'><svg id='logo-picture'></svg></a>
+ <div>labiroom.ru</div>
+ <svg id='navigation-button'></svg>
+ <nav id='header-navigation'>
+  <ul>
+   <li><a href='../'>Главная</a></li>	
+   <li><a href='../color-lines/'>Цветные линии</a></li>	
+   <li><a href='../chess-variants/'>Шахматы</a></li>	
+   <li><a href='../aforizbuka/'>Игра со словами</a></li>	
+  </ul>
+ </nav>
+</header>
+
 <main>
+
 <h1>&#8226 Шары / Color Lines &#8226</h1>
 <p>
 Логическая &#9675 стратегическая игра &#9675 головоломка<br />
-<a href='../'>На главную страницу</a>
 </p>
-<svg xmlns='http://www.w3.org/2000/svg'>
- <image xlink:href='' />
- <g id='gRoot'>
-  <g id='gSpin'>
-   <path fill='transparent' stroke='none' stroke-dth='0'  d='M 49.2 0 C 48.5 -0 48 0 47.3 0 C 31.3 0.4 15.7 8.2 6.8 22.8 C -6 43.5 -0.3 72 20.8 84.8 C 39.4 96 64.9 90.9 76.2 71.8 C 86 55.3 81.4 32.7 64.4 22.9 C 50 14.6 30.4 18.7 22.1 33.6 C 15.2 46 18.8 62.6 31.7 69.5 C 41.9 74.9 55.7 71.7 61 60.9 C 64.9 52.8 62.3 41.9 53.6 38.2 C 50.6 36.9 47.1 36.8 44 37.9 C 41 38.9 38.4 41.2 37.3 44.5 C 36.8 46.4 36.9 48.8 37.8 50.7 C 38.6 52.6 40.3 54.1 42.7 54.2 A 0.5 0.5 0 0 0 42.8 53.2 C 40.8 53.1 39.5 51.9 38.7 50.2 C 37.9 48.6 37.8 46.5 38.3 44.8 C 39.2 41.8 41.5 39.8 44.3 38.8 C 47.1 37.8 50.4 38 53.2 39.1 C 61.3 42.6 63.8 52.9 60.1 60.5 C 55 70.8 41.9 73.7 32.1 68.6 C 19.8 62 16.3 46 22.9 34.1 C 31 19.7 50 15.7 63.9 23.8 C 80.4 33.3 84.9 55.3 75.4 71.3 C 64.4 89.9 39.5 94.9 21.3 83.9 C 0.7 71.4 -4.9 43.5 7.6 23.3 C 21.6 0.6 52.4 -5.5 74.8 8.4 C 99.6 23.9 106.1 57.7 90.7 82.1 C 90.1 83.1 89.5 84.1 88.8 85 A 0.5 0.5 0 1 0 89.6 85.6 C 90.3 84.7 91 83.7 91.6 82.7 C 107.3 57.8 100.6 23.4 75.3 7.6 C 67.3 2.6 58.2 0.1 49.2 0 z'/>
-  </g>
- </g>
- <defs>
-  <linearGradient id='grdBtn' x1='0' x2='0' y1='0' y2='1'>
-   <stop offset='0%' stop-color='#eee8aa' stop-opacity='1' />
-   <stop offset='100%' stop-color='#bdb76d' stop-opacity='1' />
-  </linearGradient> 
- </defs>
-</svg>
+
+<div id='game-board'>
+<svg id='play-arena'><g id='arena-root'></g><defs></defs></svg>
+<button id='full-screen'>на весь экран</button>
+</div>
 
 <h2>Как играть</h2>
 
@@ -167,62 +188,50 @@ svg{width:400px;height:600px;border:0px solid red;}
 Фокусируйся на центре: собирать линию в центре легче, чем у края.
 Избегай изоляции. Не загоняй шарики в углы или узкие «карманы», откуда их потом невозможно будет переместить.
 Со временем станет проще видеть выгодные ходы и выстраивать стратегию.<br />
-<a href='../'>На главную страницу</a>
 </p>
 
 </main>
+
+<footer>
+ <div class='JumpToPage'>
+  <a href='../' class='JumpToPage'>На главную страницу</a>
+  <a href='#top' class='JumpToPage'>На верх страницы</a>
+ </div>
+ <nav>
+  <ul>
+   <li><a href='../color-lines/'>Цветные линии</a></li>	
+   <li><a href='../chess-variants/'>Шахматы</a></li>	
+   <li><a href='../aforizbuka/'>Игра со словами</a></li>	
+  </ul>
+ </nav>
+ <svg id='head-with-gears'></svg>
+ <svg id='head-with-brain'></svg>
+ <div>hello@labiroom.ru</div>
+ <a href='mailto:hello@labiroom.ru'><svg id='write-a-mail-button'></svg></a>
+</footer>
+
 </body>
 
-<script type='text/javascript'>
-function init(){
- //getGrid(50,'#c0c0c0');
+<script>
+const W=400;
+const H=600;
+const SVG_arena=document.getElementById('play-arena');
+//SVG_arena.style.background='radial-gradient(green 0%, green 50%, darkgreen 100%)';
+SVG_arena.setAttribute('viewBox', '0 0 '+W+' '+H);
+SVG_arena.isMaxWH=false;
+if(SVG_arena.isMaxWH===true){ // for the fullscreen toggler
+ SVG_arena.sMaxW=W+'px';
+ SVG_arena.sMaxH=H+'px';
+ SVG_arena.style.maxWidth=SVG_arena.sMaxW;
+ SVG_arena.style.maxHeight=SVG_arena.sMaxH;
 }
-var W=400;
-var H=600;
-var Z=1;
-var SVG=document.getElementsByTagName('svg')[0];
-var DFS=document.getElementsByTagName('defs')[0];
-var G_root=document.getElementById('gRoot');
-var G_spin=document.getElementById('gSpin');
-var IS_lock=true;
-// ******* ZOOM ******* //
-function setZoom(){
- var wPage=document.documentElement.clientWidth-20;
- var hPage=document.documentElement.clientHeight;
- var zWidth=wPage/W;
- var zHeight=hPage/H;
- if(zWidth>zHeight) Z=zHeight;
- else if(zWidth<zHeight) Z=zWidth;
- SVG.style.width=W*Z+'px';
- SVG.style.height=H*Z+'px';
- G_root.setAttribute('transform','scale('+Z+')');
-}//****************************************************************************************
-document.body.onorientationchange=function(){setZoom();}
-document.body.onresize=function(){setZoom();}
-setZoom();
-//
-G_spin.isOn=true;
-G_spin.w=G_spin.getBBox().width;
-G_spin.h=G_spin.getBBox().height;
-G_spin.x=(W-G_spin.w)/2;
-G_spin.y=(H-G_spin.h)/2;
-G_spin.setAttribute('transform','translate('+G_spin.x+','+G_spin.y+')');
-spin();
-var pth=G_spin.getElementsByTagName('path')[0];
-pth.setAttribute('fill','url(#grdBtn)');
-pth.setAttribute('stroke','url(#grdBtn)');
-pth.setAttribute('stroke-width','5');
-function spin(){
- G_spin.r=0;
- G_spin.isOn=true;
- anmSpin();
-}
-function anmSpin(){
- G_spin.r+=3;
- G_spin.setAttribute('transform','translate('+G_spin.x+','+G_spin.y+') rotate('+G_spin.r+','+G_spin.w/2+','+G_spin.h/2+')');
- if(G_spin.isOn===true) requestAnimationFrame(function(){anmSpin();});
- else hideG(G_spin);
-}
+const DFS=$$(SVG_arena,'defs')
+const G_root=$('arena-root');
+getLinGrad('grdPale','#fff','#eee8aa',1,1,DFS);
+const G_spin=getSpin(G_root,'url(#grdPic)',1,3,W,H,false);
+G_spin.anim(true);
+$('full-screen').onclick=function(){getFS();};
+getPaint(DFS);
 </script>
 
 <script src='script.js'></script>
@@ -244,5 +253,7 @@ function anmSpin(){
 <script src='won.js'></script>
 <script src='RUN.js'></script>
 <script src='open.js'></script>
+
+<script src='../assets/HeaderAndFooter.js'></script>
 
 </html>
