@@ -52,6 +52,11 @@ G_CHESS.play=function(squ){
  if(this.ctg=='play' && this.isTurn===this.isSide){
   if(squ.unt!==null && squ.unt.isSide===this.isSide){
    squ.appendChild(this.rctPick);
+   // painting the rctPick
+   if(squ.pnt=='#bdb76d') var pnt='#dfc18c';
+   else var pnt='#b6611e';
+   this.rctPick.setAttribute('stroke',pnt);
+   //
    this.squA=squ;
    for(var i in this.aP4wn){
     var res=this.p4wn.move(squ.nP4wn,this.aP4wn[i]);
@@ -291,8 +296,10 @@ G_CHESS.turnMove=function(nP4wnFlag){
 }
 
 G_CHESS.getPick=function(sTag,squ){
- if(squ.getElementsByTagName('rect')[0].getAttribute('fill')=='#bdb76d') var pnt='#eee8aa';
- else var pnt='#bdb76d';
+ //if(squ.getElementsByTagName('rect')[0].getAttribute('fill')=='#bdb76d') var pnt='#eee8aa';
+ //else var pnt='#bdb76d';
+ if(squ.pnt=='#bdb76d') var pnt='#dfc18c';
+ else var pnt='#b6611e';
  for(var i in this.assPick){
   var elm=this.assPick[i];
   if(elm.tagName==sTag && elm.parentNode===null){

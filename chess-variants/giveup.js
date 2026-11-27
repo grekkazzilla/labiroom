@@ -1,6 +1,6 @@
 function getGiveUp(){
  // ******* GIVEUP BUTTON *******************
- var btn=getBtn(G_CHESS,360,550,40,40,'abxx',[['',0,null]],function(){
+ var btn=getBtn(G_CHESS,350,550,40,40,'abxx',[['',0,null]],function(){
   popBx('bxGiveUp');
   var bx=$('bxGiveUp');
   bx.anim(undefined,0,bx);
@@ -14,7 +14,7 @@ function getGiveUp(){
  var btn=getBtn(bx,bx.x0,bx.y0,bx.w1,bx.h1,'bbax',[[dataPic,zPic,[0,0]]],function(){
   G_CHESS.giveUp();
  },null,true,'btnGiveUp');
- bx.pth=$$('path',btn,0);
+ bx.pth=$$(btn,'path',0);
  bx.pth.w=bx.pth.getBBox().width*zPic;
  bx.pth.h=bx.pth.getBBox().height*zPic;
  bx.pth.z=zPic;

@@ -2,7 +2,7 @@
 // *****************  RANK (LEVELS) *******************
 // ****************************************************
 G_CHESS.nRank=getLocal('chess_rank','2')*1;
-var btn=getBtn(G_CHESS,360,0,40,40,'abxb',null,function(){
+var btn=getBtn(G_CHESS,350,10,40,40,'abxb',null,function(){
  popBx('bxRank');
 },[['',null],null,'middle'],true,'btnRank');
 var bx=getBox(null,null,[40,40,5,2,10],10,null,false,G_CHESS,'bxRank');
@@ -48,7 +48,7 @@ G_CHESS.setRank=function(nRank,isSave){
   this.nRank=nRank;
   setLocal('chess_rank',nRank);
  }
- $$('text','btnRank').innerHTML=(nRank+1)+'';
+ $$('btnRank','text').innerHTML=(nRank+1)+'';
 }
 
 G_CHESS.setRank(G_CHESS.nRank,false);

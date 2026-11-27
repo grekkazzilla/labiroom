@@ -1,4 +1,5 @@
 G_CHESS.getBoard=function(){
+ //
  this.gBoard=getG(this,0,100,1,true,'gBoard');
  this.aSqu=new Array(); // squares both banned and playable
  this.assUnit=new Array(); // asset of units both on board and out
@@ -44,6 +45,7 @@ G_CHESS.getBoard=function(){
     var pnt=pntDark;
     if((i%2==0 && j%2==0) || (i%2>0 && j%2>0)) pnt=pntLight;
     getRct(squ,0,0,wSqu,wSqu,0,pnt,'none',0);
+    //getRct(squ,0,0,wSqu,wSqu,0,'transparent','none',0);
     xSqu+=wSqu;
     squ.pos=pos;
     squ.unt=null;
@@ -53,6 +55,7 @@ G_CHESS.getBoard=function(){
     num++;
     squ.onclick=function(){G_CHESS.play(this);}
     squ.style.cursor='pointer';
+    squ.pnt=pnt;
    }
    this.aSqu.push(squ);
    pos++;
@@ -64,5 +67,29 @@ G_CHESS.getBoard=function(){
  this.crlCheck=getCrl(null,25,25,20,'#ff4d4d','none',0); // blurred red circle showing a king under check
  this.crlCheck.setAttribute('filter','url(#blr4)');
  this.posEnPassant=null;
+ // wood board picture added
+ loadImage('../assets/shahwood.jpg', (err, img) => {
+   if (err) {
+     console.error(err);
+     return;
+   }
+  var aRect=this.gBoard.getElementsByTagName('rect');
+  for(var i=0;i<aRect.length;i++) aRect[i].setAttribute('fill','transparent');
+  const imgWoodBoard=document.createElementNS('http://www.w3.org/2000/svg','image');
+  imgWoodBoard.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', img.src);
+  imgWoodBoard.setAttribute('x',0);
+  imgWoodBoard.setAttribute('y',100);
+  imgWoodBoard.setAttribute('width',400);
+  imgWoodBoard.setAttribute('height',400);
+  this.insertBefore(imgWoodBoard,this.gBoard);
+ });
 }
+
+function loadImage(src, callback) {
+  const img = new Image();
+  img.onload = () => callback(null, img);
+  img.onerror = (err) => callback(new Error(`Не удалось загрузить ${src}`), null);
+  img.src = src;
+}
+
 G_CHESS.getBoard();

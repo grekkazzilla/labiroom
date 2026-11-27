@@ -45,10 +45,10 @@ return btn;}
 function setBtn(btn,ctg){
  btn.aOn=new Array();
  if(ctg.charAt(0)=='a'){
-  $$('rect',btn,0).setAttribute('fill','url(#grdBtn)');
+  $$(btn,'rect',0).setAttribute('fill','url(#grdBtn)');
   btn.aOn.push(['rect',0,'fill','url(#grdBtn)','#bdb76d'])
   if(ctg.charAt(1)=='b'){
-   $$('rect',btn,1).setAttribute('stroke','url(#grdBtnRvs)');
+   $$(btn,'rect',1).setAttribute('stroke','url(#grdBtnRvs)');
    btn.aOn.push(['rect',1,'stroke','url(#grdBtnRvs)','#fff'])
   }
   var aPth=btn.getElementsByTagName('path');
@@ -80,10 +80,10 @@ function setBtn(btn,ctg){
   }
  }
  if(ctg.charAt(0)=='b'){
-  $$('rect',btn,0).setAttribute('fill','url(#grdPic)');
+  $$(btn,'rect',0).setAttribute('fill','url(#grdPic)');
   btn.aOn.push(['rect',0,'fill','url(#grdPic)','#000'])
   if(ctg.charAt(1)=='b'){
-   $$('rect',btn,1).setAttribute('stroke','url(#grdPicRvs)');
+   $$(btn,'rect',1).setAttribute('stroke','url(#grdPicRvs)');
    btn.aOn.push(['rect',1,'stroke','url(#grdPicRvs)','#fff'])
   }
   var aPth=btn.getElementsByTagName('path');

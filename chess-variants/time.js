@@ -23,7 +23,7 @@ getBtn(bx,bx.w-59,25,40,40,'abcx',[[dataPicCross,0.07,null]],function(){
 
 
 function setTime(secTime,isSave){
- $$('text','btnTime').firstChild.nodeValue=(secTime/60)+' min';
+ $$('btnTime','text').firstChild.nodeValue=(secTime/60)+' min';
  if(isSave===true){
   SEC_time=secTime;
   SEC_time_left=secTime;

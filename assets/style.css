@@ -22,7 +22,8 @@ div.PixInLine{text-align:center;}
 div.PixInLine img{display:inline;}
 
 #picTurn{width:49px;opacity:0.75;}
-p img,li img{width:100%;max-width:500px;height:auto;margin-left:auto;margin-right:auto;display:block;}
+p img,li img,
+figure img{width:100%;max-width:500px;height:auto;margin-left:auto;margin-right:auto;display:block;}
 
 a,a:link,a:visited,a:hover,a:active,a:focus{text-decoration:underline;outline:none;color:#bdb76d;}
 a:hover{color:orange;}
@@ -39,21 +40,23 @@ hr{height:1px;border:none;background-color:#a0a0a0;}
 header,h1,h2,button,nav ul li a,footer,div.JumpToPage a{font-family:Arial,sans serif;}
 
 /* serif font general*/
-p,a,h3,li{font-family:'Times New Roman',serif;}
+p,a,h3,li,figcaption{font-family:'Times New Roman',serif;}
 
 /* 18px font-size general */
-p,a,h3,button,li{font-size:18px;}
+p,a,h3,button,li,figcaption{font-size:18px;}
 
 /* left alignment general */
 h1,h2,h3,ul,ol,div.JumpToPage{text-align:left;}
 
 /* 10px bottom margin general */
-h1,h2,p,table,li,#svgArena,
+h1,h2,p,table,li,#svgArena,figure,
 img,hr,nav,footer,section,div{margin-bottom:10px;}
 nav ul li{margin-bottom:0;}
 
 /* allow selection general */
 h1,h2,h3,p,ul,ol,li,table td{user-select:text;-webkit-user-select:text;}
+
+figcaption{color:#808080;font-style:italic;}
 
 /* header */
 header{
